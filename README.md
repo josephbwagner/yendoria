@@ -9,7 +9,7 @@ A traditional tile-based roguelike game built with Python and libtcod, featuring
 - **ASCII graphics**: Traditional roguelike visual style using character-based graphics
 - **Field of view**: Dynamic lighting system with 8-tile radius revealing map as you explore
 - **Exploration system**: Tiles become "explored" once seen and remain visible in darker colors
-- **Combat system**: Melee combat with health and damage mechanics (planned feature)
+- **Combat system**: Melee combat with health and damage mechanics
 
 ### Map Generation
 - **Procedural dungeons**: Randomly generated levels with rooms and corridors
@@ -20,8 +20,8 @@ A traditional tile-based roguelike game built with Python and libtcod, featuring
 ### Entity System
 - **Component-based architecture**: Flexible ECS (Entity Component System) design
 - **Player character**: Controllable '@' character with health and movement
-- **Monster AI**: Basic AI for orcs and trolls (AI system ready for implementation)
-- **Health system**: Hit points and damage mechanics (entities have health components)
+- **Monster AI**: Basic AI for orcs and trolls with movement and targeting
+- **Health system**: Hit points and damage mechanics with component-based architecture
 - **Graphics system**: Customizable character representation and colors
 
 ### Input & Controls
@@ -52,7 +52,11 @@ A traditional tile-based roguelike game built with Python and libtcod, featuring
 ### Running the Game
 Start the game with:
 ```bash
+# Preferred method (runs without warnings)
 poetry run python -m yendoria
+
+# Alternative method (also works)
+poetry run python -m yendoria.main
 ```
 
 Or use the VS Code task:
@@ -79,7 +83,7 @@ Or use the VS Code task:
 The game uses an Entity Component System (ECS) architecture:
 
 - **Entities**: Containers for components (Player, Orc, Troll)
-- **Components**: Data containers (Position, Health, Graphic, AI)
+- **Components**: Data containers (Position, Health, Graphic, AI, Damage)
 - **Systems**: Logic processors (Rendering, Input handling)
 
 ### Key Modules
@@ -123,7 +127,7 @@ poetry run pytest
 
 Run tests with coverage:
 ```bash
-poetry run pytest --cov=yendoria
+poetry run pytest --cov=src
 ```
 
 ### Code Structure
@@ -186,14 +190,15 @@ pip install dist/yendoria-0.1.0-py3-none-any.whl
 - Procedural dungeon generation with rooms and corridors
 - Field of view calculation and exploration tracking
 - Player movement with multiple input schemes
-- Monster entities (orcs and trolls) with positioning
+- Monster entities (orcs and trolls) with basic AI behavior
+- Damage system with component-based combat mechanics
 - Tile-based map system with proper graphics
 - Comprehensive test suite (25 tests)
 - Full documentation and development setup
 
 🚧 **Planned Features:**
-- Combat system implementation
-- Monster AI activation and pathfinding
+- Full combat system implementation (damage dealing/taking)
+- Advanced monster AI with pathfinding
 - UI improvements (health display, message log)
 - Sound effects and enhanced graphics
 - Save/load game functionality

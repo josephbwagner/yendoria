@@ -22,7 +22,7 @@ class EventHandler(tcod.event.EventDispatch[None]):
         """Initialize the event handler."""
         super().__init__()
 
-    def ev_quit(self, event: tcod.event.Quit) -> str | None:
+    def ev_quit(self, event: tcod.event.Quit) -> str | None:  # type: ignore[override]
         """
         Handle quit events (like clicking the X button).
 
@@ -34,7 +34,7 @@ class EventHandler(tcod.event.EventDispatch[None]):
         """
         return "quit"
 
-    def ev_keydown(self, event: tcod.event.KeyDown) -> str | None:
+    def ev_keydown(self, event: tcod.event.KeyDown) -> str | None:  # type: ignore[override]
         """
         Handle key press events.
 
@@ -66,7 +66,7 @@ class GameEventHandler(EventHandler):
     Extends the base event handler with game-specific actions.
     """
 
-    def ev_keydown(self, event: tcod.event.KeyDown) -> str | None:
+    def ev_keydown(self, event: tcod.event.KeyDown) -> str | None:  # type: ignore[override]
         """
         Handle key press events during normal gameplay.
 

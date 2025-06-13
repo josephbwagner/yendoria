@@ -118,7 +118,7 @@ class GameMap:
         """
         if not self.in_bounds(x, y):
             return False
-        return self.tiles[x, y].walkable
+        return bool(self.tiles[x, y].walkable)
 
     def update_fov(self, player_x: int, player_y: int, radius: int = 8) -> None:
         """

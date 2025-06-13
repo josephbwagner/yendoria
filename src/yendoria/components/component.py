@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..entities.entity import Entity
+    from ..game_map.game_map import GameMap
 
 
 class Component:
@@ -19,7 +20,7 @@ class Component:
     Systems operate on entities that have specific components.
     """
 
-    def __init__(self, entity: "Entity" = None):
+    def __init__(self, entity: "Entity | None" = None):
         """
         Initialize the component.
 
@@ -38,7 +39,7 @@ class Position(Component):
         y (int): Y coordinate
     """
 
-    def __init__(self, x: int, y: int, entity: "Entity" = None):
+    def __init__(self, x: int, y: int, entity: "Entity | None" = None):
         super().__init__(entity)
         self.x = x
         self.y = y
@@ -58,7 +59,7 @@ class Health(Component):
         max_hp (int): Maximum hit points
     """
 
-    def __init__(self, max_hp: int, entity: "Entity" = None):
+    def __init__(self, max_hp: int, entity: "Entity | None" = None):
         super().__init__(entity)
         self.max_hp = max_hp
         self.current_hp = max_hp
@@ -106,7 +107,7 @@ class Graphic(Component):
         color (Tuple[int, int, int]): RGB color tuple
     """
 
-    def __init__(self, char: int, color: tuple, entity: "Entity" = None):
+    def __init__(self, char: int, color: tuple, entity: "Entity | None" = None):
         super().__init__(entity)
         self.char = char
         self.color = color
@@ -119,7 +120,7 @@ class AI(Component):
     This is a base class that specific AI behaviors should inherit from.
     """
 
-    def perform(self, game_map, entities) -> None:
+    def perform(self, game_map: "GameMap", entities: list["Entity"]) -> None:
         """
         Perform AI action. Override in subclasses.
 
@@ -135,7 +136,7 @@ class BasicMonsterAI(AI):
     Basic AI that moves towards and attacks the player.
     """
 
-    def perform(self, game_map, entities) -> None:
+    def perform(self, game_map: "GameMap", entities: list["Entity"]) -> None:
         """
         Move towards player if visible, attack if adjacent.
 
@@ -198,3 +199,16 @@ class BasicMonsterAI(AI):
 
                 if not occupied:
                     monster_pos.move(move_x, move_y)
+
+
+class Damage(Component):
+    """
+    Component for entity damage dealing capability.
+
+    Attributes:
+        amount (int): Amount of damage this entity deals
+    """
+
+    def __init__(self, amount: int, entity: "Entity | None" = None):
+        super().__init__(entity)
+        self.amount = amount

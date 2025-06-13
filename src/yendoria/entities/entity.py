@@ -30,7 +30,7 @@ class Entity:
         """
         self.name = name
         self.is_player = is_player
-        self._components = {}
+        self._components: dict[str, Component] = {}
 
     def add_component(self, component: Component) -> None:
         """
@@ -92,7 +92,7 @@ class Entity:
             True if entity has health component and current HP > 0
         """
         if hasattr(self, "health"):
-            return self.health.is_alive
+            return bool(self.health.is_alive)
         return True  # Entities without health are considered always alive
 
     def __repr__(self) -> str:

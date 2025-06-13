@@ -17,3 +17,7 @@ def main() -> None:
     # Create and run the game engine
     engine = GameEngine()
     engine.run()
+
+
+if __name__ == "__main__":
+    main()

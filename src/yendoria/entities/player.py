@@ -4,9 +4,14 @@ Player entity module.
 This module contains functions for creating and managing the player entity.
 """
 
+from typing import TYPE_CHECKING
+
 from ..components.component import Graphic, Health, Position
 from ..utils.constants import CHAR_PLAYER, COLOR_WHITE
 from .entity import Entity
+
+if TYPE_CHECKING:
+    from ..game_map.game_map import GameMap
 
 
 def create_player(x: int, y: int) -> Entity:
@@ -30,7 +35,7 @@ def create_player(x: int, y: int) -> Entity:
     return player
 
 
-def move_player(player: Entity, dx: int, dy: int, game_map) -> bool:
+def move_player(player: Entity, dx: int, dy: int, game_map: "GameMap") -> bool:
     """
     Attempt to move the player in the given direction.
 

@@ -121,8 +121,15 @@ class GameEngine:
                     dy = int(parts[2])
 
                     # Check for combat
-                    target_x = self.player.position.x + dx
-                    target_y = self.player.position.y + dy
+                    player_pos = self.player.get_component("position")
+                    if (
+                        not player_pos
+                        or not hasattr(player_pos, "x")
+                        or not hasattr(player_pos, "y")
+                    ):
+                        return False
+                    target_x = player_pos.x + dx
+                    target_y = player_pos.y + dy
 
                     # Look for monster at target position
                     target_monster = None

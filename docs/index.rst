@@ -47,7 +47,7 @@ Architecture Overview
 The game uses an Entity Component System (ECS) architecture:
 
 * **Entities**: Containers for components (Player, Orc, Troll)
-* **Components**: Data containers (Position, Health, Graphic, AI)
+* **Components**: Data containers (Position, Health, Graphic, AI, Damage)
 * **Systems**: Logic processors (Rendering, Input handling, Game engine)
 
 Key modules:

@@ -82,7 +82,8 @@ class TestMonsters:
         assert orc.position.x == 5
         assert orc.position.y == 8
         assert orc.health.max_hp == 10
-        assert orc.damage == 3
+        assert hasattr(orc, "damage")
+        assert orc.damage.amount == 3
 
     def test_troll_creation(self):
         """Test troll monster creation."""
@@ -98,7 +99,8 @@ class TestMonsters:
         assert troll.position.x == 3
         assert troll.position.y == 7
         assert troll.health.max_hp == 16
-        assert troll.damage == 4
+        assert hasattr(troll, "damage")
+        assert troll.damage.amount == 4
 
 
 class TestComponents:
