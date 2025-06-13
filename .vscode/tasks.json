@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Yendoria",
+			"type": "shell",
+			"command": "poetry",
+			"args": [
+				"run",
+				"python",
+				"-m",
+				"yendoria"
+			],
+			"group": "build",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}
