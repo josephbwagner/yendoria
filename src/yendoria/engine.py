@@ -35,28 +35,40 @@ class GameEngine:
         entities (List[Entity]): List of all entities in the game
         player (Entity): The player entity
         renderer (RenderingSystem): Rendering system instance
-        context (tcod.context.Context): The tcod context for display
+        context (tcod.context.Context | None): The tcod context for display
+            (None in headless mode)
         is_running (bool): Whether the game is currently running
     """
 
-    def __init__(self, width: int = SCREEN_WIDTH, height: int = SCREEN_HEIGHT):
+    context: tcod.context.Context | None
+
+    def __init__(
+        self,
+        width: int = SCREEN_WIDTH,
+        height: int = SCREEN_HEIGHT,
+        headless: bool = False,
+    ):
         """
         Initialize the game engine.
 
         Args:
             width: Screen width in characters
             height: Screen height in characters
+            headless: If True, skip graphics initialization for testing
         """
         self.screen_width = width
         self.screen_height = height
 
-        # Initialize tcod context
-        self.context = tcod.context.new(
-            columns=width,
-            rows=height,
-            title="Yendoria",
-            vsync=True,
-        )
+        # Initialize tcod context only if not in headless mode
+        if not headless:
+            self.context = tcod.context.new(
+                columns=width,
+                rows=height,
+                title="Yendoria",
+                vsync=True,
+            )
+        else:
+            self.context = None
 
         # Initialize game systems
         self.renderer = RenderingSystem()
@@ -190,7 +202,8 @@ class GameEngine:
     def render(self) -> None:
         """Render the current game state."""
         self.renderer.render_all(self.game_map, self.entities, self.player)
-        self.renderer.present(self.context)
+        if self.context is not None:
+            self.renderer.present(self.context)
 
     def run(self) -> None:
         """Main game loop."""
@@ -201,7 +214,8 @@ class GameEngine:
                 self.render()
         finally:
             # Clean up
-            self.context.close()
+            if self.context is not None:
+                self.context.close()
 
     def stop(self) -> None:
         """Stop the game."""

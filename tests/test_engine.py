@@ -10,7 +10,7 @@ class TestGameEngine:
 
     def test_engine_initialization(self):
         """Test that the engine initializes properly."""
-        engine = GameEngine()
+        engine = GameEngine(headless=True)
 
         assert engine.screen_width == 80
         assert engine.screen_height == 50
@@ -22,7 +22,7 @@ class TestGameEngine:
 
     def test_player_creation(self):
         """Test that the player is created correctly."""
-        engine = GameEngine()
+        engine = GameEngine(headless=True)
 
         assert engine.player.is_player is True
         assert hasattr(engine.player, "position")
@@ -32,7 +32,7 @@ class TestGameEngine:
 
     def test_game_map_generation(self):
         """Test that the game map is generated correctly."""
-        engine = GameEngine()
+        engine = GameEngine(headless=True)
 
         assert engine.game_map.width == 80
         assert engine.game_map.height == 43
@@ -40,7 +40,7 @@ class TestGameEngine:
 
     def test_monster_placement(self):
         """Test that monsters are placed in the dungeon."""
-        engine = GameEngine()
+        engine = GameEngine(headless=True)
 
         # Count non-player entities (monsters)
         monsters = [e for e in engine.entities if not e.is_player]
@@ -51,7 +51,7 @@ class TestGameEngine:
 
     def test_handle_quit_action(self):
         """Test that quit action stops the engine."""
-        engine = GameEngine()
+        engine = GameEngine(headless=True)
 
         assert engine.is_running is True
         engine.handle_player_action("quit")
@@ -59,9 +59,32 @@ class TestGameEngine:
 
     def test_handle_invalid_action(self):
         """Test that invalid actions don't crash the engine."""
-        engine = GameEngine()
+        engine = GameEngine(headless=True)
 
         # Should not consume turn or crash
         result = engine.handle_player_action("invalid_action")
         assert result is False
         assert engine.is_running is True
+
+    def test_headless_mode(self):
+        """Test that headless mode works correctly."""
+        # Test headless mode
+        headless_engine = GameEngine(headless=True)
+        assert headless_engine.context is None
+        assert headless_engine.is_running is True
+
+        # Test that render doesn't crash in headless mode
+        headless_engine.render()  # Should not raise an exception
+
+        # Test that cleanup doesn't crash in headless mode
+        headless_engine.stop()
+        assert headless_engine.is_running is False
+
+    def test_normal_mode(self):
+        """Test that normal mode works correctly."""
+        normal_engine = GameEngine(headless=False)
+        assert normal_engine.context is not None
+        assert normal_engine.is_running is True
+
+        # Here you could add more tests related to the normal mode,
+        # like checking if the window is created, etc.

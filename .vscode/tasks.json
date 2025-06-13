@@ -117,7 +117,7 @@
 			"label": "Full CI Check",
 			"type": "shell",
 			"command": "poetry",
-			"args": ["run", "sh", "-c", "ruff check . && ruff format --check . && mypy && pytest --cov=src/yendoria --cov-fail-under=50 && bandit -r src/ && safety check"],
+			"args": ["run", "sh", "-c", "ruff check . && ruff format --check . && mypy && pytest --cov=src/yendoria --cov-fail-under=55 && bandit -r src/ && safety check"],
 			"group": "build",
 			"presentation": {
 				"echo": true,
