@@ -20,3 +20,18 @@ repos:
         args: [ --fix ]
       # Run the formatter.
       - id: ruff-format
+
+  # Type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.13.0
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-setuptools]
+
+  # Security scanning
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.3
+    hooks:
+      - id: bandit
+        args: ["--skip", "B311"]
+        exclude: tests/

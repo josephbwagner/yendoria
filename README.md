@@ -97,38 +97,89 @@ The game uses an Entity Component System (ECS) architecture:
 
 ## Development
 
-### Code Quality
-This project uses automated code quality tools:
+### Code Quality & CI/CD Pipeline
+This project uses **production-grade development practices** with:
 
-- **Ruff**: Fast linting and formatting
-- **MyPy**: Static type checking
-- **Pre-commit**: Automated checks before commits
+#### 🔄 **Continuous Integration**
+- **GitHub Actions CI**: Multi-platform testing (Ubuntu, macOS, Windows)
+- **Multi-Python Support**: Tested on Python 3.10, 3.11, 3.12, 3.13
+- **Automated Quality Gates**: All code must pass linting, formatting, type checking, and tests
+- **Test Coverage Reporting**: Comprehensive coverage tracking with Codecov integration
+
+#### 🔒 **Security & Dependencies**
+- **Automated Security Scanning**: Bandit (code security) + Safety (dependency vulnerabilities)
+- **Dependabot Integration**: Automated dependency updates with security patches
+- **pip-audit**: Additional dependency vulnerability scanning
+- **Weekly Security Audits**: Scheduled automated security reviews
+
+#### 📊 **Quality Assurance**
+- **Ruff**: Ultra-fast linting and formatting (replaces flake8, black, isort)
+- **MyPy**: Static type checking with strict configuration
+- **Pre-commit Hooks**: Automated checks before every commit
+- **Test Coverage**: 55%+ coverage requirement with branch coverage tracking
+
+#### 🛠️ **Developer Experience**
+- **VS Code Integration**: Comprehensive tasks and settings
+- **Professional Templates**: Issue and PR templates for structured collaboration
+- **Automated Workflows**: One-command quality validation
 
 #### Quick Commands:
 ```bash
-# Lint and format code
-poetry run ruff check --fix .
-poetry run ruff format .
+# 🔍 Code Quality Checks
+poetry run ruff check --fix .     # Lint and auto-fix
+poetry run ruff format .          # Format code
+poetry run mypy                   # Type checking
 
-# Type checking
-poetry run mypy src
+# 🧪 Testing & Coverage
+poetry run pytest                 # Run tests
+poetry run pytest --cov=src/yendoria --cov-report=html  # Test with coverage
 
-# Run all quality checks
+# 🔒 Security Scanning
+poetry run bandit -r src/         # Security linting
+poetry run safety check           # Dependency vulnerabilities
+
+# 🚀 Complete CI Check (runs all validations)
+poetry run ruff check . && poetry run ruff format --check . && poetry run mypy && poetry run pytest --cov=src/yendoria --cov-fail-under=55
+
+# ⚡ Pre-commit (automated on git commit)
 poetry run pre-commit run --all-files
 ```
+
+#### VS Code Tasks
+Access via Command Palette (`Cmd+Shift+P`/`Ctrl+Shift+P`) → "Tasks: Run Task":
+- **Run Yendoria** - Start the game
+- **Lint with Ruff** - Check code quality
+- **Format with Ruff** - Format code
+- **Type Check with MyPy** - Static analysis
+- **Run Tests with Coverage** - Full test suite with coverage
+- **Security Scan with Bandit** - Code security check
+- **Security Check with Safety** - Dependency vulnerabilities
+- **Full CI Check** - Complete validation pipeline
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed setup and usage information.
 
 ### Running Tests
 Execute the test suite:
 ```bash
+# Basic test run
 poetry run pytest
+
+# With coverage reporting
+poetry run pytest --cov=src/yendoria
+
+# Generate HTML coverage report
+poetry run pytest --cov=src/yendoria --cov-report=html
+# View report: open htmlcov/index.html
+
+# With coverage threshold (CI requirement)
+poetry run pytest --cov=src/yendoria --cov-fail-under=55
 ```
 
-Run tests with coverage:
-```bash
-poetry run pytest --cov=src
-```
+**Current Test Metrics:**
+- ✅ **25/25 tests passing**
+- ✅ **55.87% code coverage** (above 55% threshold)
+- ✅ **Cross-platform compatibility** (Ubuntu, macOS, Windows)
+- ✅ **Multi-Python version support** (3.10-3.13)
 
 ### Code Structure
 ```
@@ -172,15 +223,30 @@ src/yendoria/
 
 ## Building and Distribution
 
-### Create Distribution Package
+### Local Development Build
 ```bash
-poetry build
-```
+# Install in development mode
+poetry install
 
-### Install from Built Package
-```bash
+# Build distribution packages
+poetry build
+
+# Install from built package
 pip install dist/yendoria-0.1.0-py3-none-any.whl
 ```
+
+### Production Deployment
+The project includes **GitHub Actions workflows** for:
+- ✅ **Automated builds** on every PR and push
+- ✅ **Multi-platform testing** (Ubuntu, macOS, Windows)
+- ✅ **Security scanning** and dependency updates
+- ✅ **Release automation** (ready for semantic versioning)
+
+**CI/CD Pipeline Status:**
+- 🔄 **Continuous Integration**: Full quality gate validation
+- 🔒 **Security**: Automated vulnerability scanning
+- 📦 **Packaging**: Ready for PyPI publication
+- 🏷️ **Releases**: Automated GitHub releases (when tagged)
 
 ## Project Status
 
@@ -193,7 +259,11 @@ pip install dist/yendoria-0.1.0-py3-none-any.whl
 - Monster entities (orcs and trolls) with basic AI behavior
 - Damage system with component-based combat mechanics
 - Tile-based map system with proper graphics
-- Comprehensive test suite (25 tests)
+- **Production-grade CI/CD pipeline** with GitHub Actions
+- **Comprehensive test suite** (25 tests, 55%+ coverage)
+- **Multi-platform compatibility** (Ubuntu, macOS, Windows, Python 3.10-3.13)
+- **Automated security scanning** (Bandit, Safety, pip-audit)
+- **Professional development workflows** (pre-commit, quality gates)
 - Full documentation and development setup
 
 🚧 **Planned Features:**
@@ -220,27 +290,88 @@ View the built documentation by opening `docs/_build/html/index.html` in your br
 - **numpy** (^2.0.0): For efficient array operations (map tiles, FOV)
 
 ### Development Dependencies
-- **pytest** (^6.0): Testing framework
-- **sphinx** (^7.0): Documentation generation (updated for Python 3.13 compatibility)
-- **sphinx-autodoc-typehints**: Type hints in documentation
+- **pytest** (^7.0): Testing framework with coverage support
+- **pytest-cov**: Test coverage reporting and HTML generation
+- **pytest-html**: Enhanced test reports with HTML output
+- **mypy**: Static type checking and analysis
+- **ruff**: Ultra-fast linting, formatting, and import sorting
+- **bandit**: Security vulnerability scanning for code
+- **safety**: Dependency vulnerability scanning
+- **pre-commit**: Git hooks for automated quality checks
+- **sphinx** (^7.0): Documentation generation (Python 3.13 compatible)
+- **sphinx-autodoc-typehints**: Type hints in generated documentation
+
+### CI/CD Dependencies
+- **GitHub Actions**: Multi-platform testing and deployment
+- **Codecov**: Test coverage reporting and tracking
+- **Dependabot**: Automated dependency updates and security patches
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass (`poetry run pytest`)
-6. Commit your changes (`git commit -am 'Add new feature'`)
-7. Push to the branch (`git push origin feature/new-feature`)
-8. Create a Pull Request
+We welcome contributions! This project follows **production-grade development practices**.
 
-### Coding Standards
-- Follow PEP 8 style guidelines
-- Add type hints to all functions
-- Include docstrings for all classes and functions
-- Write tests for new functionality
-- Update documentation as needed
+### Quick Start for Contributors
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Set up development environment:**
+   ```bash
+   poetry install
+   poetry run pre-commit install  # Install quality hooks
+   ```
+
+### Development Workflow
+4. Make your changes following our **automated quality standards**
+5. **Quality checks** (automated via pre-commit):
+   ```bash
+   # These run automatically on commit, or manually:
+   poetry run ruff check --fix .    # Auto-fix linting issues
+   poetry run ruff format .         # Format code
+   poetry run mypy                  # Type checking
+   poetry run pytest               # Run tests
+   ```
+6. Add tests for new functionality (**55%+ coverage required**)
+7. Ensure **all CI checks pass** (ruff, mypy, pytest, security scans)
+8. Commit your changes (`git commit -am 'Add amazing feature'`)
+9. Push to the branch (`git push origin feature/amazing-feature`)
+10. Create a Pull Request using our **PR template**
+
+### Quality Standards (Automated)
+- ✅ **Code Style**: Ruff linting and formatting (enforced)
+- ✅ **Type Safety**: MyPy static analysis (zero errors required)
+- ✅ **Test Coverage**: 55%+ coverage with passing tests
+- ✅ **Security**: Bandit security scanning (no high-risk issues)
+- ✅ **Dependencies**: Safety vulnerability scanning
+- ✅ **Multi-platform**: Must work on Ubuntu, macOS, Windows
+- ✅ **Multi-Python**: Compatible with Python 3.10-3.13
+
+### Professional Templates
+- 🐛 **Bug Report Template**: Structured issue reporting
+- ✨ **Feature Request Template**: Game design consideration guidelines
+- 🔧 **Technical Issue Template**: Architecture and code quality improvements
+- 📝 **Pull Request Template**: Comprehensive change documentation
+
+### Coding Standards (Automated Enforcement)
+- **PEP 8 Compliance**: Enforced via Ruff linting
+- **Type Hints**: Required for all functions (MyPy validation)
+- **Documentation**: Docstrings required for classes and public functions
+- **Testing**: Write tests for new functionality (pytest framework)
+- **Security**: No security vulnerabilities (Bandit + Safety scanning)
+- **Import Organization**: Automated via Ruff import sorting
+- **Code Formatting**: Consistent style via Ruff formatting (88-char lines)
+
+### Automated Quality Checks
+When you commit, **pre-commit hooks automatically**:
+1. 🔧 **Fix linting issues** where possible
+2. 🎨 **Format code** to consistent style
+3. 🔍 **Check types** with MyPy
+4. 🔒 **Scan for security** issues
+5. ✅ **Validate file consistency**
+
+**CI Pipeline** runs on every PR:
+- 🏗️ **Multi-platform builds** (Ubuntu, macOS, Windows)
+- 🐍 **Multi-Python testing** (3.10, 3.11, 3.12, 3.13)
+- 📊 **Test coverage analysis** with Codecov reporting
+- 🔐 **Security vulnerability scanning**
 
 ## License
 

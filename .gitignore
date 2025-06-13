@@ -51,6 +51,16 @@ coverage.xml
 .pytest_cache/
 cover/
 
+# Coverage and test reports
+.coverage
+htmlcov/
+coverage.xml
+.pytest_cache/
+reports/
+*.cover
+.hypothesis/
+.cache
+
 # Translations
 *.mo
 *.pot
@@ -209,3 +219,8 @@ secrets.json
 
 # Tool caches
 .ruff_cache/
+
+# Security scan reports
+bandit-report.json
+safety-report.json
+pip-audit-report.json

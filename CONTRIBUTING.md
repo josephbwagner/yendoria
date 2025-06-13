@@ -1,72 +1,200 @@
-# Code Quality Setup
+# Contributing to Yendoria
 
-This document describes the linting, formatting, and type checking setup for Yendoria.
+This document describes the **production-grade development practices** for Yendoria, including our comprehensive CI/CD pipeline, quality assurance tools, and automated workflows.
 
-## Tools Used
+## 🚀 Development Environment Setup
 
-### Ruff
-- **Purpose**: Fast linter and formatter for Python
-- **Features**:
-  - Linting (replaces flake8, pylint)
-  - Code formatting (replaces black)
-  - Import sorting (replaces isort)
-  - Supports modern Python features
+### Prerequisites
+- Python 3.10+ (tested on 3.10, 3.11, 3.12, 3.13)
+- Poetry for dependency management
+- Git for version control
 
-### MyPy
-- **Purpose**: Static type checking
-- **Features**:
-  - Catches type-related errors
-  - Improves code documentation
-  - Helps with IDE support
-
-### Pre-commit
-- **Purpose**: Git hooks for automated checks
-- **Features**:
-  - Runs checks before each commit
-  - Automatically fixes issues when possible
-  - Ensures consistent code quality
-
-## Configuration
-
-All tool configurations are stored in `pyproject.toml`:
-
-- **Ruff**: Configured for 88-character line length, Python 3.10+ features
-- **MyPy**: Moderate strictness settings, ignores missing imports for external libraries
-
-## Usage
-
-### Manual Commands
-
+### Quick Setup
 ```bash
-# Linting
-poetry run ruff check .
+# Clone and setup
+git clone <repository-url>
+cd yendoria
+poetry install
 
-# Auto-fix linting issues
-poetry run ruff check --fix .
+# Install automated quality hooks
+poetry run pre-commit install
 
-# Format code
-poetry run ruff format .
-
-# Type checking
-poetry run mypy src
-
-# Check formatting without changing files
-poetry run ruff format --check .
+# Verify setup
+poetry run pytest                    # Run tests
+poetry run ruff check .             # Check code quality
+poetry run mypy                     # Type checking
 ```
 
-### VS Code Integration
+## 🏭 Production-Grade Tools
 
-The setup includes:
+### Core Quality Stack
 
-- **Settings**: `.vscode/settings.json` with format-on-save enabled
-- **Tasks**: `.vscode/tasks.json` with linting and formatting tasks
-- **Extensions**: `.vscode/extensions.json` with recommended extensions
+### Core Quality Stack
 
-#### Recommended Extensions:
-- `charliermarsh.ruff` - Ruff linter and formatter
-- `ms-python.mypy-type-checker` - MyPy type checking
+#### 🔧 Ruff - Ultra-Fast Python Tooling
+- **Purpose**: All-in-one linting, formatting, and import sorting
+- **Features**:
+  - Replaces flake8, black, isort, and more
+  - 10-100x faster than traditional tools
+  - Auto-fixes most issues
+  - Modern Python feature support
+
+#### 🎯 MyPy - Static Type Analysis
+- **Purpose**: Catch type-related errors before runtime
+- **Features**:
+  - Static type checking with gradual typing
+  - IDE integration for better development experience
+  - Configurable strictness levels
+  - External library type stub support
+
+#### 🪝 Pre-commit - Automated Quality Gates
+- **Purpose**: Enforce quality standards on every commit
+- **Features**:
+  - Runs multiple tools automatically
+  - Prevents bad code from entering repository
+  - Auto-fixes issues when possible
+  - Integrates with CI/CD pipeline
+
+#### 🧪 Pytest - Comprehensive Testing
+- **Purpose**: Test framework with coverage tracking
+- **Features**:
+  - 25+ unit tests covering core functionality
+  - 55%+ code coverage requirement
+  - HTML coverage reports
+  - Parameterized and fixture-based testing
+
+#### 🔒 Security Stack
+- **Bandit**: Python security linting (checks for common vulnerabilities)
+- **Safety**: Dependency vulnerability scanning
+- **pip-audit**: Additional dependency security analysis
+
+## 🔄 CI/CD Pipeline
+
+### GitHub Actions Workflows
+
+#### Main CI Pipeline (`.github/workflows/ci.yml`)
+- **Triggers**: Every push and PR to main/develop branches
+- **Matrix Testing**:
+  - **OS**: Ubuntu, macOS, Windows
+  - **Python**: 3.10, 3.11, 3.12, 3.13
+- **Quality Gates**:
+  1. Ruff linting and formatting validation
+  2. MyPy static type checking
+  3. Full test suite with coverage reporting
+  4. Codecov integration for coverage tracking
+
+#### Security Scanning (`.github/workflows/security.yml`)
+- **Triggers**: Every push/PR + weekly scheduled scans
+- **Scans**:
+  1. Bandit security linting
+  2. Safety dependency vulnerability check
+  3. pip-audit additional security analysis
+- **Reporting**: Security artifacts uploaded for review
+
+#### Dependency Management
+- **Dependabot**: Automated dependency updates
+- **Schedule**: Weekly updates for Python packages and GitHub Actions
+- **Security**: Automatic security patch updates
+
+## ⚙️ Configuration
+
+All tool configurations are centralized in `pyproject.toml`:
+
+### Pytest & Coverage Configuration
+```toml
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "--cov=src/yendoria",
+    "--cov-report=html:htmlcov",
+    "--cov-report=xml:coverage.xml",
+    "--cov-fail-under=55",
+    "--cov-branch"
+]
+```
+
+### Ruff Configuration
+```toml
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "UP", "I", "PL", "B", "SIM", "C4"]
+```
+
+### MyPy Configuration
+```toml
+[tool.mypy]
+python_version = "3.10"
+check_untyped_defs = true
+warn_redundant_casts = true
+files = ["src/yendoria", "tests"]
+```
+
+### Security Configuration
+```toml
+[tool.bandit]
+exclude_dirs = ["tests", "build", "dist"]
+skips = ["B311"]  # Allow random for games
+```
+
+## 💻 Development Workflow
+
+### Daily Development Commands
+
+```bash
+# 🔍 Code Quality
+poetry run ruff check --fix .       # Lint with auto-fix
+poetry run ruff format .            # Format code
+poetry run mypy                     # Type checking
+
+# 🧪 Testing & Coverage
+poetry run pytest                   # Run tests
+poetry run pytest --cov=src/yendoria --cov-report=html  # With coverage
+open htmlcov/index.html             # View coverage report
+
+# 🔒 Security Scanning
+poetry run bandit -r src/           # Security linting
+poetry run safety check             # Dependency vulnerabilities
+
+# ⚡ Complete Validation (matches CI)
+poetry run ruff check . && \
+poetry run ruff format --check . && \
+poetry run mypy && \
+poetry run pytest --cov=src/yendoria --cov-fail-under=55
+
+# 🪝 Pre-commit Testing
+poetry run pre-commit run --all-files
+```
+
+### VS Code Integration (Recommended)
+
+### VS Code Integration (Recommended)
+
+**Automatic Setup**: The project includes complete VS Code configuration:
+
+#### Extensions (`.vscode/extensions.json`)
+- `charliermarsh.ruff` - Ruff linting and formatting
+- `ms-python.mypy-type-checker` - MyPy integration
 - `ms-python.python` - Python language support
-- `ms-python.vscode-pylance` - Enhanced Python language server
+- `ms-python.vscode-pylance` - Enhanced language server
+
+#### Settings (`.vscode/settings.json`)
+- **Format on Save**: Automatic code formatting
+- **Lint on Save**: Real-time error detection
+- **Type Checking**: Live MyPy integration
+
+#### Tasks (`.vscode/tasks.json`)
+Access via `Cmd+Shift+P` → "Tasks: Run Task":
+- **Run Yendoria** - Start the game
+- **Lint with Ruff** - Code quality check
+- **Format with Ruff** - Code formatting
+- **Type Check with MyPy** - Static analysis
+- **Run Tests with Coverage** - Full test suite
+- **Security Scan with Bandit** - Security check
+- **Security Check with Safety** - Dependency scan
+- **Full CI Check** - Complete validation pipeline
 
 ### Pre-commit Hooks
 

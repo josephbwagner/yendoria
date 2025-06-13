@@ -3,6 +3,8 @@ API Documentation
 
 This section provides detailed API documentation for all modules in Yendoria.
 
+**Code Quality Standards**: All modules follow strict typing, documentation, and quality standards enforced by our CI/CD pipeline including MyPy type checking, Ruff linting, and comprehensive test coverage.
+
 Core Modules
 ------------
 

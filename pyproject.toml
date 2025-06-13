@@ -16,12 +16,16 @@ tcod = "^16.0.0"
 numpy = "^2.0.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^6.0"
+pytest = ">=7.0,<8.0"
 sphinx = "^7.0"
 sphinx-autodoc-typehints = "^1.0"
 ruff = "^0.6.0"
 mypy = "^1.11.0"
 pre-commit = "^3.8.0"
+pytest-cov = "^6.2.1"
+pytest-html = "^4.1.1"
+bandit = {extras = ["toml"], version = "^1.8.3"}
+safety = "^3.5.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -100,3 +104,69 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "numpy.*"
 ignore_missing_imports = true
+
+# Pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=src/yendoria",
+    "--cov-report=term-missing",
+    "--cov-report=html:htmlcov",
+    "--cov-report=xml:coverage.xml",
+    "--cov-fail-under=55",
+    "--cov-branch",
+    "--html=reports/pytest_report.html",
+    "--self-contained-html"
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "benchmark: marks tests as benchmark tests"
+]
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["src"]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/conftest.py",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod"
+]
+show_missing = true
+precision = 2
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+# Bandit security linting configuration
+[tool.bandit]
+exclude_dirs = ["tests", "build", "dist"]
+skips = ["B101", "B311", "B601"]  # Skip assert_used, random (for games), and shell_injection_process
+# B101: Test for use of assert (common in tests and games)
+# B311: Standard pseudo-random generators (acceptable for games)
+# B601: paramiko calls (not applicable to this project)

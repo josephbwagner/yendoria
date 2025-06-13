@@ -1,16 +1,25 @@
 Yendoria Documentation
 ======================
 
-Welcome to Yendoria! This project is a traditional tile-based roguelike game built with Python and libtcod.
+Welcome to Yendoria! This project is a traditional tile-based roguelike game built with Python and libtcod, featuring **production-grade development practices** and a comprehensive CI/CD pipeline.
 
 Features
 --------
 
+### Core Gameplay
 * **Entity Component System (ECS)**: Flexible architecture for game entities
 * **Procedural Generation**: Randomly generated dungeons with rooms and corridors
-* **Field of View**: Dynamic lighting and exploration system
-* **Modern Python**: Built with Python 3.10+ using Poetry for dependency management
-* **Comprehensive Testing**: Full test suite with 25+ unit tests
+* **Field of View**: Dynamic lighting and exploration system with 8-tile radius
+* **Turn-based Combat**: Melee combat with health and damage mechanics
+* **Multiple Input Schemes**: Arrow keys, WASD, vim keys, and numpad support
+
+### Development Excellence
+* **Production-Grade CI/CD**: GitHub Actions with multi-platform testing (Ubuntu, macOS, Windows)
+* **Multi-Python Support**: Tested on Python 3.10, 3.11, 3.12, 3.13
+* **Automated Quality Gates**: Comprehensive linting, formatting, type checking, and testing
+* **Security Scanning**: Automated vulnerability detection with Bandit, Safety, and pip-audit
+* **Test Coverage**: 55%+ coverage requirement with comprehensive reporting
+* **Professional Workflows**: Pre-commit hooks, automated dependency updates, and structured templates
 
 Quick Start
 -----------
@@ -63,9 +72,55 @@ Key modules:
 Development
 -----------
 
-Run tests::
+### Quality Assurance & CI/CD
 
+This project follows **production-grade development practices**:
+
+**Code Quality**::
+
+    # Ultra-fast linting and formatting
+    poetry run ruff check --fix .
+    poetry run ruff format .
+
+    # Static type checking
+    poetry run mypy
+
+**Testing & Coverage**::
+
+    # Run full test suite
     poetry run pytest
+
+    # With coverage reporting (55%+ required)
+    poetry run pytest --cov=src/yendoria --cov-report=html
+
+**Security Scanning**::
+
+    # Code security analysis
+    poetry run bandit -r src/
+
+    # Dependency vulnerability scanning
+    poetry run safety check
+
+**Complete CI Validation**::
+
+    # Run all quality checks (matches CI pipeline)
+    poetry run ruff check . && poetry run ruff format --check . && poetry run mypy && poetry run pytest --cov=src/yendoria --cov-fail-under=55
+
+**Automated Workflows**::
+
+    # Pre-commit hooks (runs on every commit)
+    poetry run pre-commit run --all-files
+
+**GitHub Actions Pipeline**:
+
+* **Multi-platform Testing**: Ubuntu, macOS, Windows
+* **Multi-Python Testing**: Python 3.10, 3.11, 3.12, 3.13
+* **Automated Quality Gates**: All code must pass linting, type checking, and tests
+* **Security Scanning**: Weekly automated vulnerability scans
+* **Dependency Updates**: Automated Dependabot integration
+* **Test Coverage Reporting**: Codecov integration with coverage thresholds
+
+### Documentation
 
 Build documentation::
 

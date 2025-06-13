@@ -70,6 +70,62 @@
 				"panel": "shared"
 			},
 			"problemMatcher": []
+		},
+		{
+			"label": "Run Tests with Coverage",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "pytest", "--cov=src/yendoria", "--cov-report=html", "--cov-report=term"],
+			"group": "test",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Security Scan with Bandit",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "bandit", "-r", "src/"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Security Check with Safety",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "safety", "check"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Full CI Check",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "sh", "-c", "ruff check . && ruff format --check . && mypy && pytest --cov=src/yendoria --cov-fail-under=80 && bandit -r src/ && safety check"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
 		}
 	]
 }
