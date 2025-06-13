@@ -10,7 +10,7 @@ import tcod.event
 from ..utils.constants import MOVE_KEYS
 
 
-class EventHandler(tcod.event.EventDispatch[None]):
+class EventHandler(tcod.event.EventDispatch[str | None]):
     """
     Main event handler for the game.
 
