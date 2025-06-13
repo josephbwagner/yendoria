@@ -14,6 +14,62 @@
 			"group": "build",
 			"isBackground": false,
 			"problemMatcher": []
+		},
+		{
+			"label": "Lint with Ruff",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "ruff", "check", "."],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Format with Ruff",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "ruff", "format", "."],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Type Check with MyPy",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "mypy", "src"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Run All Checks",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "sh", "-c", "ruff check . && ruff format --check . && mypy src"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
 		}
 	]
 }

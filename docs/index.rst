@@ -7,7 +7,7 @@ Features
 --------
 
 * **Entity Component System (ECS)**: Flexible architecture for game entities
-* **Procedural Generation**: Randomly generated dungeons with rooms and corridors  
+* **Procedural Generation**: Randomly generated dungeons with rooms and corridors
 * **Field of View**: Dynamic lighting and exploration system
 * **Modern Python**: Built with Python 3.10+ using Poetry for dependency management
 * **Comprehensive Testing**: Full test suite with 25+ unit tests
@@ -38,7 +38,7 @@ Game Controls
 -------------
 
 * **Movement**: Arrow keys, WASD, vim keys (hjkl), or numpad (including diagonals)
-* **Exploration**: Move to reveal new areas within your 8-tile field of view  
+* **Exploration**: Move to reveal new areas within your 8-tile field of view
 * **Quit**: Press Escape or close the window
 
 Architecture Overview
@@ -54,7 +54,7 @@ Key modules:
 
 * ``engine.py``: Main game loop and coordination
 * ``game_map/``: Map generation and tile management
-* ``entities/``: Entity creation and management  
+* ``entities/``: Entity creation and management
 * ``components/``: ECS component definitions
 * ``systems/``: Game systems (rendering, etc.)
 * ``input_handlers/``: Input processing

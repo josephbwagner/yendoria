@@ -93,6 +93,28 @@ The game uses an Entity Component System (ECS) architecture:
 
 ## Development
 
+### Code Quality
+This project uses automated code quality tools:
+
+- **Ruff**: Fast linting and formatting
+- **MyPy**: Static type checking
+- **Pre-commit**: Automated checks before commits
+
+#### Quick Commands:
+```bash
+# Lint and format code
+poetry run ruff check --fix .
+poetry run ruff format .
+
+# Type checking
+poetry run mypy src
+
+# Run all quality checks
+poetry run pre-commit run --all-files
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed setup and usage information.
+
 ### Running Tests
 Execute the test suite:
 ```bash

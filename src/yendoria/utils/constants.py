@@ -23,6 +23,14 @@ ROOM_MAX_SIZE = 10
 ROOM_MIN_SIZE = 6
 MAX_ROOMS = 30
 
+# Probability constants
+MONSTER_SPAWN_CHANCE = 0.8  # 80% chance to spawn monster in room
+ORC_SPAWN_CHANCE = 0.8  # 80% chance for orc, 20% for troll
+TUNNEL_DIRECTION_CHANCE = 0.5  # 50% chance for horizontal-first tunnel
+
+# Game mechanics constants
+MOVE_COMMAND_PARTS = 3  # Expected parts in move command
+
 # Colors using tuple format (compatible with newer tcod)
 # Map colors
 COLOR_DARK_WALL = (0, 0, 100)
@@ -39,11 +47,11 @@ COLOR_BLUE = (0, 0, 255)
 COLOR_YELLOW = (255, 255, 0)
 
 # Character representations
-CHAR_PLAYER = ord('@')
-CHAR_ORC = ord('o')
-CHAR_TROLL = ord('T')
-CHAR_WALL = ord('#')
-CHAR_FLOOR = ord('.')
+CHAR_PLAYER = ord("@")
+CHAR_ORC = ord("o")
+CHAR_TROLL = ord("T")
+CHAR_WALL = ord("#")
+CHAR_FLOOR = ord(".")
 
 # Game settings
 FPS = 60
@@ -55,7 +63,6 @@ MOVE_KEYS = {
     tcod.event.KeySym.DOWN: (0, 1),
     tcod.event.KeySym.LEFT: (-1, 0),
     tcod.event.KeySym.RIGHT: (1, 0),
-    
     # Numpad
     tcod.event.KeySym.KP_8: (0, -1),
     tcod.event.KeySym.KP_2: (0, 1),
@@ -65,13 +72,11 @@ MOVE_KEYS = {
     tcod.event.KeySym.KP_9: (1, -1),
     tcod.event.KeySym.KP_1: (-1, 1),
     tcod.event.KeySym.KP_3: (1, 1),
-    
     # WASD keys
     tcod.event.KeySym.w: (0, -1),
     tcod.event.KeySym.s: (0, 1),
     tcod.event.KeySym.a: (-1, 0),
     tcod.event.KeySym.d: (1, 0),
-    
     # Vim keys
     tcod.event.KeySym.h: (-1, 0),
     tcod.event.KeySym.j: (0, 1),

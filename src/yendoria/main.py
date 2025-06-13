@@ -11,7 +11,7 @@ from .engine import GameEngine
 def main() -> None:
     """
     Main function to start Yendoria.
-    
+
     Initializes the game engine and starts the main game loop.
     """
     # Create and run the game engine

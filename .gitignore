@@ -206,3 +206,6 @@ secrets.json
 *.bak
 *.backup
 *~
+
+# Tool caches
+.ruff_cache/

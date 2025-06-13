@@ -5,32 +5,34 @@ This module defines the Tile class which represents individual tiles
 on the game map, including their visual and gameplay properties.
 """
 
-from typing import Tuple
-import tcod
 from ..utils.constants import (
-    COLOR_DARK_WALL, COLOR_DARK_GROUND,
-    COLOR_LIGHT_WALL, COLOR_LIGHT_GROUND,
-    COLOR_WHITE, CHAR_WALL, CHAR_FLOOR
+    CHAR_FLOOR,
+    CHAR_WALL,
+    COLOR_DARK_GROUND,
+    COLOR_DARK_WALL,
+    COLOR_LIGHT_GROUND,
+    COLOR_LIGHT_WALL,
+    COLOR_WHITE,
 )
 
 
 class Tile:
     """
     A tile on the game map with visual and gameplay properties.
-    
+
     Attributes:
         walkable (bool): True if entities can walk through this tile
         transparent (bool): True if this tile doesn't block field of view
         dark (TileGraphic): Graphics to use when tile is not visible
         light (TileGraphic): Graphics to use when tile is visible
     """
-    
+
     def __init__(
         self,
         walkable: bool,
         transparent: bool,
-        dark: Tuple[int, Tuple[int, int, int], Tuple[int, int, int]],
-        light: Tuple[int, Tuple[int, int, int], Tuple[int, int, int]]
+        dark: tuple[int, tuple[int, int, int], tuple[int, int, int]],
+        light: tuple[int, tuple[int, int, int], tuple[int, int, int]],
     ):
         self.walkable = walkable
         self.transparent = transparent

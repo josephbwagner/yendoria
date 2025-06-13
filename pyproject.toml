@@ -19,7 +19,82 @@ numpy = "^2.0.0"
 pytest = "^6.0"
 sphinx = "^7.0"
 sphinx-autodoc-typehints = "^1.0"
+ruff = "^0.6.0"
+mypy = "^1.11.0"
+pre-commit = "^3.8.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+# Ruff configuration
+[tool.ruff]
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+# Assume Python 3.10+
+target-version = "py310"
+
+# Include source and test directories
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
+# Also enable:
+# - pyupgrade (`UP`) - modernize Python code
+# - isort (`I`) - import sorting
+# - pylint (`PL`) - additional linting
+# - flake8-bugbear (`B`) - find likely bugs
+# - flake8-simplify (`SIM`) - simplify code
+# - flake8-comprehensions (`C4`) - improve comprehensions
+select = ["E", "F", "UP", "I", "PL", "B", "SIM", "C4"]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.per-file-ignores]
+# Tests can use magic values, assertions, and longer lines
+"tests/**/*" = ["PLR2004", "S101", "E501"]
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.10"
+check_untyped_defs = true
+disallow_untyped_defs = false  # Start lenient, can be made stricter later
+disallow_incomplete_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+warn_unreachable = true
+strict_optional = true
+show_error_codes = true
+
+# Paths to check
+files = ["src", "tests"]
+
+# Per-module options
+[[tool.mypy.overrides]]
+module = "tcod.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "numpy.*"
+ignore_missing_imports = true
