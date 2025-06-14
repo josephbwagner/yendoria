@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.1 (2025-06-14)
+
+### Bug Fixes
+
+- Address bandit warnings
+  ([`52196b6`](https://github.com/josephbwagner/yendoria/commit/52196b6907a4eb06b6992c2c4133105299a81a7a))
+
+
 ## v0.3.0 (2025-06-14)
 
 ### Features
