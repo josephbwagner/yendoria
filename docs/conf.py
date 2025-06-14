@@ -39,13 +39,13 @@ html_static_path = ["_static"]
 # Furo theme options
 # Furo theme options
 html_theme_options = {
-    "source_repository": "https://github.com/jwagner-net/yendoria/",
-    "source_branch": "main",
+    "source_repository": "https://github.com/josephbwagner/yendoria/",
+    "source_branch": "master",
     "source_directory": "docs/",
     "footer_icons": [
         {
             "name": "GitHub",
-            "url": "https://github.com/jwagner-net/yendoria",
+            "url": "https://github.com/josephbwagner/yendoria",
             "html": (
                 '<svg stroke="currentColor" fill="currentColor" '
                 'stroke-width="0" viewBox="0 0 16 16">'
