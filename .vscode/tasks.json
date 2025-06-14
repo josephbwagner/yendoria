@@ -126,6 +126,90 @@
 				"panel": "shared"
 			},
 			"problemMatcher": []
+		},
+		{
+			"label": "Conventional Commit",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "cz", "commit"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Current Version",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["version", "--short"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Preview Next Version",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "semantic-release", "version", "--print"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Generate Changelog",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "cz", "changelog"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Release Package",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["build"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate Release Setup",
+			"type": "shell",
+			"command": "poetry",
+			"args": ["run", "sh", "-c", "echo '🔍 Checking release setup...' && poetry version --short && echo '📋 Checking conventional commits...' && poetry run cz version --dry-run && echo '🏗️ Testing build...' && poetry build --dry-run && echo '✅ Release setup validated!'"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
 		}
 	]
 }

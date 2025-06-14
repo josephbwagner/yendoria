@@ -27,6 +27,9 @@ pytest-cov = "^6.2.1"
 pytest-html = "^4.1.1"
 bandit = {extras = ["toml"], version = "^1.8.3"}
 safety = "^3.5.2"
+# Release automation tools
+python-semantic-release = "^9.15.0"  # Semantic versioning and release automation
+commitizen = "^4.1.0"  # Conventional commits and changelog generation
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -171,3 +174,48 @@ skips = ["B101", "B311", "B601"]  # Skip assert_used, random (for games), and sh
 # B101: Test for use of assert (common in tests and games)
 # B311: Standard pseudo-random generators (acceptable for games)
 # B601: paramiko calls (not applicable to this project)
+
+# Python Semantic Release configuration
+[tool.semantic_release]
+version_toml = ["pyproject.toml:tool.poetry.version"]
+version_variables = [
+    "src/yendoria/__init__.py:__version__",
+    "docs/conf.py:version",
+    "docs/conf.py:release",
+]
+build_command = "poetry build"
+dist_path = "dist/"
+upload_to_vcs_release = true
+upload_to_pypi = false
+upload_to_repository = false
+remove_dist = false
+commit_author = "semantic-release <semantic-release>"
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf"]
+
+[tool.semantic_release.remote.token]
+env = "GH_TOKEN"
+
+[tool.semantic_release.changelog]
+template_dir = "templates"
+exclude_commit_patterns = []
+
+[tool.semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG.md"
+
+[tool.semantic_release.branches.master]
+match = "(master|main)"
+prerelease_token = "rc"
+prerelease = false
+
+# Commitizen configuration for conventional commits
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "semver"
+version_provider = "poetry"
+update_changelog_on_bump = true
+major_version_zero = true
