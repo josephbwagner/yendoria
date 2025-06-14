@@ -2,6 +2,10 @@
 Tests for the game engine module.
 """
 
+import os
+
+import pytest
+
 from src.yendoria.engine import GameEngine
 
 
@@ -80,11 +84,16 @@ class TestGameEngine:
         headless_engine.stop()
         assert headless_engine.is_running is False
 
+    @pytest.mark.skipif(
+        os.getenv("CI") is not None or os.getenv("GITHUB_ACTIONS") is not None,
+        reason="Skipping graphics test in CI environment",
+    )
     def test_normal_mode(self):
         """Test that normal mode works correctly."""
         normal_engine = GameEngine(headless=False)
         assert normal_engine.context is not None
         assert normal_engine.is_running is True
 
-        # Here you could add more tests related to the normal mode,
-        # like checking if the window is created, etc.
+        # Test that cleanup works in normal mode
+        normal_engine.stop()
+        assert normal_engine.is_running is False
