@@ -276,12 +276,32 @@ The project includes **GitHub Actions workflows** for:
 
 ## Documentation
 
+📚 **Online Documentation**: https://your-username.github.io/roguelike-game/
+
+The project documentation is automatically built and deployed to GitHub Pages using Sphinx. The documentation includes:
+
+- **API Reference**: Complete code documentation with type hints
+- **Getting Started Guide**: Installation and usage instructions
+- **Development Guide**: Contributing guidelines and development setup
+- **Architecture Overview**: Component system and game engine design
+
+### Building Documentation Locally
+
 Build documentation with Sphinx:
 ```bash
-poetry run python -m sphinx -b html docs docs/_build/html
+cd docs
+poetry run sphinx-build -b html . _build/html
 ```
 
 View the built documentation by opening `docs/_build/html/index.html` in your browser.
+
+### Documentation Deployment
+
+Documentation is automatically built and deployed via GitHub Actions:
+- **Trigger**: Pushes to `main` branch and pull requests
+- **Build**: Sphinx generates HTML documentation with the Furo theme
+- **Deploy**: Automatically deployed to GitHub Pages on pushes to `main`
+- **Manual**: Can be triggered manually from the Actions tab
 
 ## Dependencies
 
