@@ -42,7 +42,7 @@ jobs:
     - name: Run Safety vulnerability check
       run: |
         poetry add --group dev safety
-        poetry run safety check --json --output safety-report.json
+        poetry run safety scan --output=json --output-file=safety-report.json
       continue-on-error: true
 
     - name: Run pip-audit for dependency vulnerabilities

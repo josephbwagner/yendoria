@@ -5,22 +5,52 @@ This module handles input events from the player including movement,
 actions, and system commands like quitting the game.
 """
 
+from typing import Protocol
+
 import tcod.event
 
 from ..utils.constants import MOVE_KEYS
 
 
-class EventHandler(tcod.event.EventDispatch[str | None]):
+class EventHandler(Protocol):
     """
-    Main event handler for the game.
+    Protocol for event handlers in the game.
+
+    Modern tcod event handling using Protocol instead of deprecated EventDispatch.
+    """
+
+    def handle_events(self, event: tcod.event.Event) -> str | None:
+        """Handle an event and return an action string or None."""
+        ...
+
+
+class BaseEventHandler:
+    """
+    Base event handler for the game.
 
     Handles keyboard and other input events, returning appropriate
     actions for the game engine to process.
     """
 
-    def __init__(self):
-        """Initialize the event handler."""
-        super().__init__()
+    def handle_events(self, event: tcod.event.Event) -> str | None:
+        """
+        Handle events using modern tcod pattern.
+
+        Args:
+            event: The tcod event to handle
+
+        Returns:
+            Action string or None
+        """
+        # Handle quit events
+        if isinstance(event, tcod.event.Quit):
+            return self.ev_quit(event)
+
+        # Handle keydown events
+        if isinstance(event, tcod.event.KeyDown):
+            return self.ev_keydown(event)
+
+        return None
 
     def ev_quit(self, event: tcod.event.Quit) -> str | None:
         """
@@ -59,7 +89,7 @@ class EventHandler(tcod.event.EventDispatch[str | None]):
         return None
 
 
-class GameEventHandler(EventHandler):
+class GameEventHandler(BaseEventHandler):
     """
     Event handler for the main game state.
 
@@ -101,7 +131,7 @@ def handle_events() -> str | None:
     handler = GameEventHandler()
 
     for event in tcod.event.wait():
-        action: str | None = handler.dispatch(event)
+        action: str | None = handler.handle_events(event)
         if action:
             return action
 

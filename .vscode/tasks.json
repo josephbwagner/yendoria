@@ -103,7 +103,7 @@
 			"label": "Security Check with Safety",
 			"type": "shell",
 			"command": "poetry",
-			"args": ["run", "safety", "check"],
+			"args": ["run", "safety", "scan"],
 			"group": "build",
 			"presentation": {
 				"echo": true,
@@ -117,7 +117,7 @@
 			"label": "Full CI Check",
 			"type": "shell",
 			"command": "poetry",
-			"args": ["run", "sh", "-c", "ruff check . && ruff format --check . && mypy && pytest --cov=src/yendoria --cov-fail-under=55 && bandit -r src/ && safety check"],
+			"args": ["run", "sh", "-c", "ruff check . && ruff format --check . && mypy && pytest --cov=src/yendoria --cov-fail-under=55 && bandit -r src/ && safety scan"],
 			"group": "build",
 			"presentation": {
 				"echo": true,
