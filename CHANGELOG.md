@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.0 (2025-06-14)
+
+### Features
+
+- Modding support
+  ([`2447aca`](https://github.com/josephbwagner/yendoria/commit/2447acaa173233c40e209a53b8c4f117b906f1be))
+
+
 ## v0.2.1 (2025-06-14)
 
 ### Bug Fixes

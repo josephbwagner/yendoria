@@ -7,8 +7,8 @@ sys.path.insert(0, os.path.abspath("../src"))
 # Project information
 project = "Yendoria"
 author = "Joseph Wagner"
-release = "0.2.1"
-version = "0.2.1"
+release = "0.3.0"
+version = "0.3.0"
 copyright = "2025, Joseph Wagner"
 
 # General configuration
