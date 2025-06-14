@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v0.2.1 (2025-06-14)
+
+### Bug Fixes
+
+- **deprecations**: Modernize event handling and update security tools
+  ([`e1f51e0`](https://github.com/josephbwagner/yendoria/commit/e1f51e0a0c50a51bdb7e6beaab82c9e0a450132f))
+
+- Replace deprecated tcod.event.EventDispatch with Protocol-based approach - Update from deprecated
+  'safety check' to 'safety scan' command - Upgrade pip from vulnerable 24.3.1 to secure 25.1.1 -
+  Fix import formatting and remove unused imports - All CI checks now pass without deprecation
+  warnings
+
+Resolves all deprecation warnings and security vulnerabilities.
+
+
 ## v0.2.0 (2025-06-14)
 
 ### Features
