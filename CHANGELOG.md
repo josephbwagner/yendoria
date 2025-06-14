@@ -1,52 +1,60 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## v0.1.1 (2025-06-14)
 
-## [Unreleased]
+### Bug Fixes
 
-### Added
-- Release automation with semantic versioning
-- Conventional commit workflow
-- Automated changelog generation
+- **release**: Add semantic-release configuration for initial setup
+  ([`5fb5c22`](https://github.com/josephbwagner/yendoria/commit/5fb5c224fb4ed18c4663c9bd2807e87a28917f5b))
 
-## [0.1.0] - 2025-06-13
+- Added tag_format configuration - Added major_on_zero and allow_zero_version flags - Enables
+  semantic-release to work with initial repository setup
 
-### Added
-- Initial release of Yendoria roguelike game
-- Core gameplay mechanics:
-  - Turn-based gameplay with player and monster entities
-  - Procedural dungeon generation with rooms and corridors
-  - Field of view system with 8-tile radius
-  - ASCII graphics using tcod library
-  - Multiple input schemes (arrow keys, WASD, vim keys, numpad)
-  - Basic combat system with health and damage
-- Component-based entity system architecture
-- Production-grade development setup:
-  - Multi-platform CI/CD pipeline (Ubuntu, macOS, Windows)
-  - Multi-Python version support (3.10, 3.11, 3.12, 3.13)
-  - Comprehensive quality gates (ruff, mypy, pytest)
-  - Security scanning (bandit, safety, pip-audit)
-  - Test coverage reporting with Codecov
-  - Automated dependency updates with Dependabot
-  - Pre-commit hooks for code quality
-  - GitHub issue and PR templates
-  - VS Code integration with tasks
-- Documentation:
-  - Sphinx documentation with Furo theme
-  - Automated GitHub Pages deployment
-  - API documentation with type hints
-  - Development guides and setup instructions
+- **release**: Update semantic-release workflow commands
+  ([`5aab9ab`](https://github.com/josephbwagner/yendoria/commit/5aab9ab1b86d7025e2dc7c0f5a73b24bc786d72f))
 
-### Technical Details
-- Built with Python 3.10+ and Poetry for dependency management
-- Uses tcod 19.0.0 for terminal graphics and input handling
-- Implements Entity Component System (ECS) architecture
-- Comprehensive test suite with 55%+ coverage
-- Type-checked with MyPy for reliability
-- Linted and formatted with Ruff for consistency
+- Updated semantic-release command syntax for newer version - Added baseline tag v0.1.0 for initial
+  release setup - Added test script for diagnosing release automation
 
-[Unreleased]: https://github.com/josephbwagner/yendoria/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/josephbwagner/yendoria/releases/tag/v0.1.0
+This should resolve the 'No tags found' error in the release workflow.
+
+
+## v0.1.0 (2025-06-13)
+
+### Bug Fixes
+
+- **ci**: Add workflow_call trigger to enable reusable workflow
+  ([`9a5bf7b`](https://github.com/josephbwagner/yendoria/commit/9a5bf7b14308f54a00e428286bce905eaa806c1b))
+
+- Added workflow_call trigger to CI workflow - Enables release workflow to call CI workflow for
+  testing - Resolves GitHub Actions workflow validation error
+
+Fixes release workflow failure that occurred when trying to call CI workflow without proper reusable
+  workflow configuration.
+
+### Continuous Integration
+
+- **deps**: Bump codecov/codecov-action from 3 to 5
+  ([`9da43c5`](https://github.com/josephbwagner/yendoria/commit/9da43c57abf55cec186ce20cdb118d8a2e2ac6a5))
+
+Bumps [codecov/codecov-action](https://github.com/codecov/codecov-action) from 3 to 5. - [Release
+  notes](https://github.com/codecov/codecov-action/releases) -
+  [Changelog](https://github.com/codecov/codecov-action/blob/main/CHANGELOG.md) -
+  [Commits](https://github.com/codecov/codecov-action/compare/v3...v5)
+
+--- updated-dependencies: - dependency-name: codecov/codecov-action dependency-version: '5'
+
+dependency-type: direct:production
+
+update-type: version-update:semver-major ...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+- **deps**: Bump codecov/codecov-action from 4 to 5
+  ([`cc556c4`](https://github.com/josephbwagner/yendoria/commit/cc556c4ad79076bf35c5adaf4e9410f8a7313708))
+
+### Documentation
+
+- Complete release automation setup
+  ([`a904774`](https://github.com/josephbwagner/yendoria/commit/a904774677759e366b6a4c7cf7fbfabe246c0ab0))
