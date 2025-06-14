@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.2.0 (2025-06-14)
+
+### Features
+
+- Enable publishing
+  ([`5a6da54`](https://github.com/josephbwagner/yendoria/commit/5a6da547e00423e06f95098d44ffb4d05d7718a7))
+
+
 ## v0.1.1 (2025-06-14)
 
 ### Bug Fixes
