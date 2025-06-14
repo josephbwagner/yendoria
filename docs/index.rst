@@ -6,14 +6,16 @@ Welcome to Yendoria! This project is a traditional tile-based roguelike game bui
 Features
 --------
 
-### Core Gameplay
+Core Gameplay
+~~~~~~~~~~~~~
 * **Entity Component System (ECS)**: Flexible architecture for game entities
 * **Procedural Generation**: Randomly generated dungeons with rooms and corridors
 * **Field of View**: Dynamic lighting and exploration system with 8-tile radius
 * **Turn-based Combat**: Melee combat with health and damage mechanics
 * **Multiple Input Schemes**: Arrow keys, WASD, vim keys, and numpad support
 
-### Development Excellence
+Development Excellence
+~~~~~~~~~~~~~~~~~~~~~~
 * **Production-Grade CI/CD**: GitHub Actions with multi-platform testing (Ubuntu, macOS, Windows)
 * **Multi-Python Support**: Tested on Python 3.10, 3.11, 3.12, 3.13
 * **Automated Quality Gates**: Comprehensive linting, formatting, type checking, and testing
@@ -42,6 +44,17 @@ Contents
    :caption: Contents:
 
    api
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Modding System:
+
+   modding_quickstart
+   modding
+   modding_api
+   modding_tutorial
+   modding_examples
+   modding_roadmap
 
 Game Controls
 -------------
@@ -72,7 +85,8 @@ Key modules:
 Development
 -----------
 
-### Quality Assurance & CI/CD
+Quality Assurance & CI/CD
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This project follows **production-grade development practices**:
 
@@ -120,7 +134,8 @@ This project follows **production-grade development practices**:
 * **Dependency Updates**: Automated Dependabot integration
 * **Test Coverage Reporting**: Codecov integration with coverage thresholds
 
-### Documentation
+Documentation
+~~~~~~~~~~~~~
 
 Build documentation::
 

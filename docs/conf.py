@@ -72,3 +72,30 @@ napoleon_google_docstring = True
 napoleon_numpy_docstring = True
 napoleon_include_init_with_doc = False
 napoleon_include_private_with_doc = False
+
+# Intersphinx settings for external library references
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "tcod": ("https://python-tcod.readthedocs.io/en/latest/", None),
+}
+
+# Autodoc settings to reduce warnings
+autodoc_typehints = "description"
+autodoc_typehints_description_target = "documented"
+
+# Suppress warnings for missing references in external libraries
+nitpicky = False  # Turn off nitpicky mode for external refs
+nitpick_ignore = [
+    ("py:class", "tcod.context.Context"),
+    ("py:class", "tcod.Console"),
+    ("py:class", "tcod.event.Event"),
+    ("py:class", "tcod.event.KeyDown"),
+    ("py:class", "tcod.event.Quit"),
+    ("py:class", "np.ndarray"),
+    ("py:class", "TileGraphic"),
+    ("py:class", "collections.abc.Iterator"),
+    ("py:class", "collections.abc.Callable"),
+    ("py:data", "typing.Any"),
+    ("py:class", "enum.Enum"),
+]
