@@ -1,14 +1,40 @@
 import os
+import subprocess  # nosec B404 # Safe use for git version detection in docs
 import sys
 
 # Add the project directory to the sys.path
 sys.path.insert(0, os.path.abspath("../src"))
 
+
+def get_version_from_git():
+    """Get version from git tags, fallback to static version."""
+    try:
+        # Try to get version from git describe
+        result = subprocess.run(  # nosec B603 B607 # Safe hardcoded git command for docs
+            ["git", "describe", "--tags", "--dirty", "--always"],
+            capture_output=True,
+            text=True,
+            cwd=os.path.dirname(os.path.abspath(__file__)),
+            check=False,  # Don't raise exception on non-zero exit
+        )
+        if result.returncode == 0:
+            version_str = result.stdout.strip()
+            # Remove 'v' prefix if present
+            if version_str.startswith("v"):
+                version_str = version_str[1:]
+            return version_str
+    except (subprocess.SubprocessError, FileNotFoundError):
+        pass
+
+    # Fallback to static version
+    return "0.3.0"
+
+
 # Project information
 project = "Yendoria"
 author = "Joseph Wagner"
-release = "0.3.0"
-version = "0.3.0"
+release = get_version_from_git()
+version = release.split("-")[0]  # Remove commit info for short version
 copyright = "2025, Joseph Wagner"
 
 # General configuration
