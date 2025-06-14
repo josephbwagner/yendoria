@@ -106,7 +106,9 @@ jobs:
         run: |
           git config --global user.name "semantic-release"
           git config --global user.email "semantic-release@github.com"
-          poetry run semantic-release version --print
+
+          # Use the newer semantic-release command format
+          poetry run semantic-release version
           poetry run semantic-release publish
 
       - name: Get new version
