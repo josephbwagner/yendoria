@@ -1,0 +1,19 @@
+# Global code ownership
+# All files are owned by the project maintainer
+* @josephbwagner
+
+# Python dependencies (poetry.lock, pyproject.toml)
+poetry.lock @josephbwagner
+pyproject.toml @josephbwagner
+
+# GitHub workflows and dependabot config
+.github/ @josephbwagner
+
+# Documentation
+*.md @josephbwagner
+docs/ @josephbwagner
+
+# Configuration files
+*.toml @josephbwagner
+*.yaml @josephbwagner
+*.yml @josephbwagner
