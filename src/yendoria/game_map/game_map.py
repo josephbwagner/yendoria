@@ -63,12 +63,12 @@ class GameMap:
             Tuple[int, int]: Starting position (player spawn point)
         """
         for _room_number in range(MAX_ROOMS):
-            room_width = random.randint(ROOM_MIN_SIZE, ROOM_MAX_SIZE)
-            room_height = random.randint(ROOM_MIN_SIZE, ROOM_MAX_SIZE)
+            room_width = random.randint(ROOM_MIN_SIZE, ROOM_MAX_SIZE)  # nosec B311
+            room_height = random.randint(ROOM_MIN_SIZE, ROOM_MAX_SIZE)  # nosec B311
 
             # Random position within map bounds
-            x = random.randint(0, self.width - room_width - 1)
-            y = random.randint(0, self.height - room_height - 1)
+            x = random.randint(0, self.width - room_width - 1)  # nosec B311
+            y = random.randint(0, self.height - room_height - 1)  # nosec B311
 
             # Create new room
             new_room = RectangularRoom(x, y, room_width, room_height)

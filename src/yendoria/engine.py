@@ -61,11 +61,14 @@ class GameEngine:
 
         # Initialize tcod context only if not in headless mode
         if not headless:
+            tileset = self._load_system_font()
+
             self.context = tcod.context.new(
                 columns=width,
                 rows=height,
                 title="Yendoria",
                 vsync=True,
+                tileset=tileset,
             )
         else:
             self.context = None
@@ -79,6 +82,55 @@ class GameEngine:
         # Generate the dungeon and create entities
         self._setup_game()
 
+    def _load_system_font(self) -> tcod.tileset.Tileset | None:
+        """
+        Try to load a system monospace font for the tileset.
+
+        Returns:
+            A loaded tileset, or None if no suitable font is found
+        """
+        try:
+            import os
+            import platform
+
+            # Choose a font based on the operating system
+            system = platform.system()
+            font_path = None
+
+            if system == "Darwin":  # macOS
+                # Try SF Mono (modern macOS) first
+                if os.path.exists("/System/Library/Fonts/SFNSMono.ttf"):
+                    font_path = "/System/Library/Fonts/SFNSMono.ttf"
+                elif os.path.exists("/System/Library/Fonts/Monaco.ttf"):
+                    font_path = "/System/Library/Fonts/Monaco.ttf"
+            elif system == "Windows":
+                if os.path.exists("C:\\Windows\\Fonts\\consola.ttf"):
+                    font_path = "C:\\Windows\\Fonts\\consola.ttf"  # Consolas
+                elif os.path.exists("C:\\Windows\\Fonts\\cour.ttf"):
+                    font_path = "C:\\Windows\\Fonts\\cour.ttf"  # Courier New
+            else:  # Linux and others
+                # Try common Linux monospace fonts
+                linux_fonts = [
+                    "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+                    "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+                    "/usr/share/fonts/TTF/DejaVuSansMono.ttf",
+                ]
+                for font in linux_fonts:
+                    if os.path.exists(font):
+                        font_path = font
+                        break
+
+            # Load the font if it exists
+            if font_path and os.path.exists(font_path):
+                return tcod.tileset.load_truetype_font(font_path, 16, 16)
+
+        except (OSError, ImportError, TypeError, ValueError):
+            # If any font loading error occurs, fall back to no tileset
+            # Specific exceptions: file not found, import issues, invalid parameters
+            pass  # nosec B110
+
+        return None
+
     def _setup_game(self) -> None:
         """Set up the initial game state."""
         # Generate dungeon
@@ -91,11 +143,11 @@ class GameEngine:
         # Place monsters in rooms (except the first room where player starts)
         for room in self.game_map.rooms[1:]:
             # 80% chance to place a monster in each room
-            if random.random() < MONSTER_SPAWN_CHANCE:
+            if random.random() < MONSTER_SPAWN_CHANCE:  # nosec B311
                 monster_x, monster_y = room.center
 
                 # 80% chance for orc, 20% chance for troll
-                if random.random() < ORC_SPAWN_CHANCE:
+                if random.random() < ORC_SPAWN_CHANCE:  # nosec B311
                     monster = create_orc(monster_x, monster_y)
                 else:
                     monster = create_troll(monster_x, monster_y)

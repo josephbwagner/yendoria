@@ -76,7 +76,7 @@ def tunnel_between(
     x1, y1 = start
     x2, y2 = end
 
-    if random.random() < TUNNEL_DIRECTION_CHANCE:  # 50% chance
+    if random.random() < TUNNEL_DIRECTION_CHANCE:  # nosec B311
         # Move horizontally, then vertically
         corner_x, corner_y = x2, y1
     else:
