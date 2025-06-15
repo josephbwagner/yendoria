@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.4.0 (2025-06-15)
+
+### Features
+
+- Implement AI foundations
+  ([`bc8ec42`](https://github.com/josephbwagner/yendoria/commit/bc8ec42f9e234c4f06dc1376b8c142f5d5aa8b44))
+
+
 ## v0.3.1 (2025-06-14)
 
 ### Bug Fixes

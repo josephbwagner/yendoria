@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yendoria"
-version = "0.3.1"
+version = "0.4.0"
 description = "A traditional tile-based roguelike built with Python and libtcod."
 authors = ["Joseph Wagner <j.wagner1024@gmail.com>"]
 license = "MIT"
