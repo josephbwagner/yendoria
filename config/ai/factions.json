@@ -1,0 +1,223 @@
+{
+  "factions": {
+    "cult_of_flame": {
+      "name": "Cult of the Hollow Flame",
+      "description": "Zealous worshippers of dark fire magic seeking to consume the world in eternal flame",
+      "personality": {
+        "aggression": 0.8,
+        "cunning": 0.9,
+        "loyalty": 0.95,
+        "caution": 0.3,
+        "expansionism": 0.7,
+        "greed": 0.4
+      },
+      "goals": [
+        {
+          "type": "control_territory",
+          "target": "shrine_zones",
+          "priority": 0.9,
+          "description": "Capture and corrupt all shrines"
+        },
+        {
+          "type": "eliminate_faction",
+          "target": "silver_wardens",
+          "priority": 0.6,
+          "description": "Destroy the light-wielding zealots"
+        },
+        {
+          "type": "perform_ritual",
+          "target": "summon_flame_lord",
+          "priority": 0.8,
+          "requirements": ["controlled_shrines >= 3"],
+          "description": "Perform the great summoning"
+        }
+      ],
+      "relationships": {
+        "silver_wardens": -0.9,
+        "ratkin_tribes": -0.2,
+        "shadow_guild": 0.3,
+        "undead_legions": 0.1
+      },
+      "resources": {
+        "military_strength": 75,
+        "economic_power": 40,
+        "magical_influence": 95,
+        "territory_control": 60
+      },
+      "diplomacy": {
+        "accepts_truces": false,
+        "accepts_tribute": true,
+        "offers_alliances": false,
+        "betrayal_likelihood": 0.2
+      },
+      "special_abilities": [
+        "flame_corruption",
+        "dark_rituals",
+        "fanatical_loyalty"
+      ]
+    },
+
+    "silver_wardens": {
+      "name": "Silver Wardens",
+      "description": "Holy warriors dedicated to purging darkness and protecting the innocent",
+      "personality": {
+        "aggression": 0.6,
+        "cunning": 0.4,
+        "loyalty": 0.9,
+        "caution": 0.7,
+        "expansionism": 0.3,
+        "greed": 0.1
+      },
+      "goals": [
+        {
+          "type": "protect_territory",
+          "target": "temple_zones",
+          "priority": 0.9,
+          "description": "Defend sacred sites from corruption"
+        },
+        {
+          "type": "eliminate_faction",
+          "target": "cult_of_flame",
+          "priority": 0.8,
+          "description": "Purge the flame cultists"
+        },
+        {
+          "type": "rescue_civilians",
+          "target": "any_zone",
+          "priority": 0.7,
+          "description": "Save innocents from dark forces"
+        }
+      ],
+      "relationships": {
+        "cult_of_flame": -0.9,
+        "ratkin_tribes": 0.1,
+        "shadow_guild": -0.6,
+        "undead_legions": -0.8
+      },
+      "resources": {
+        "military_strength": 80,
+        "economic_power": 70,
+        "magical_influence": 60,
+        "territory_control": 50
+      },
+      "diplomacy": {
+        "accepts_truces": true,
+        "accepts_tribute": false,
+        "offers_alliances": true,
+        "betrayal_likelihood": 0.05
+      },
+      "special_abilities": [
+        "holy_magic",
+        "undead_turning",
+        "blessing_rituals"
+      ]
+    },
+
+    "ratkin_tribes": {
+      "name": "Ratkin Tribes",
+      "description": "Cunning scavenger clans that adapt and survive in the deep places",
+      "personality": {
+        "aggression": 0.4,
+        "cunning": 0.9,
+        "loyalty": 0.6,
+        "caution": 0.8,
+        "expansionism": 0.5,
+        "greed": 0.7
+      },
+      "goals": [
+        {
+          "type": "scavenge_resources",
+          "target": "any_zone",
+          "priority": 0.8,
+          "description": "Collect valuable scraps and materials"
+        },
+        {
+          "type": "expand_territory",
+          "target": "underground_zones",
+          "priority": 0.6,
+          "description": "Claim new tunnel systems"
+        },
+        {
+          "type": "avoid_conflict",
+          "target": "stronger_factions",
+          "priority": 0.7,
+          "description": "Stay hidden from major powers"
+        }
+      ],
+      "relationships": {
+        "cult_of_flame": -0.2,
+        "silver_wardens": 0.1,
+        "shadow_guild": 0.4,
+        "undead_legions": -0.3
+      },
+      "resources": {
+        "military_strength": 30,
+        "economic_power": 45,
+        "magical_influence": 20,
+        "territory_control": 35
+      },
+      "diplomacy": {
+        "accepts_truces": true,
+        "accepts_tribute": true,
+        "offers_alliances": true,
+        "betrayal_likelihood": 0.3
+      },
+      "special_abilities": [
+        "tunnel_networks",
+        "stealth_expertise",
+        "rapid_breeding"
+      ]
+    },
+
+    "monsters": {
+      "name": "monsters",
+      "description": "A loose collection of wild, dangerous creatures hostile to most civilized beings.",
+      "personality": {
+        "aggression": 1.0,
+        "cunning": 0.3,
+        "loyalty": 0.1,
+        "caution": 0.2,
+        "expansionism": 0.4,
+        "greed": 0.2
+      },
+      "goals": [
+        {
+          "type": "hunt_intruders",
+          "target": "any_zone",
+          "priority": 0.9,
+          "description": "Attack any non-monster that enters their territory"
+        },
+        {
+          "type": "defend_territory",
+          "target": "lair_zones",
+          "priority": 0.7,
+          "description": "Protect their lairs from invaders"
+        }
+      ],
+      "relationships": {
+        "cult_of_flame": -0.5,
+        "silver_wardens": -0.8,
+        "ratkin_tribes": -0.3,
+        "shadow_guild": -0.4,
+        "undead_legions": -0.2
+      },
+      "resources": {
+        "military_strength": 60,
+        "economic_power": 10,
+        "magical_influence": 15,
+        "territory_control": 40
+      },
+      "diplomacy": {
+        "accepts_truces": false,
+        "accepts_tribute": false,
+        "offers_alliances": false,
+        "betrayal_likelihood": 0.9
+      },
+      "special_abilities": [
+        "feral_instincts",
+        "night_vision",
+        "pack_hunting"
+      ]
+    }
+  }
+}

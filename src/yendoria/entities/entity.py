@@ -30,7 +30,11 @@ class Entity:
         """
         self.name = name
         self.is_player = is_player
+        self.id: str | None = None  # Will be set by ComponentManager
         self._components: dict[str, Component] = {}
+
+        # For AI system compatibility
+        self._ai_entity_id: str | None = None
 
     def add_component(self, component: Component) -> None:
         """

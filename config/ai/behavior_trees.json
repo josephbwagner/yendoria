@@ -1,0 +1,413 @@
+{
+  "behavior_trees": {
+    "zealot_combat": {
+      "description": "Aggressive behavior for cult zealots focused on spreading flame",
+      "root": {
+        "type": "selector",
+        "name": "zealot_main",
+        "children": [
+          {
+            "type": "sequence",
+            "name": "emergency_heal",
+            "condition": "health_below_25_percent",
+            "children": [
+              {
+                "type": "action",
+                "name": "use_healing_potion"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "protect_cultists",
+            "condition": "ally_in_danger_nearby",
+            "children": [
+              {
+                "type": "action",
+                "name": "move_to_ally"
+              },
+              {
+                "type": "action",
+                "name": "cast_dark_blessing"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "aggressive_combat",
+            "condition": "enemy_visible",
+            "children": [
+              {
+                "type": "selector",
+                "name": "choose_attack",
+                "children": [
+                  {
+                    "type": "sequence",
+                    "name": "flame_spell",
+                    "condition": "has_mana_and_range",
+                    "children": [
+                      {
+                        "type": "action",
+                        "name": "cast_flame_bolt"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sequence",
+                    "name": "charge_attack",
+                    "condition": "enemy_in_melee_range",
+                    "children": [
+                      {
+                        "type": "action",
+                        "name": "fanatical_charge"
+                      },
+                      {
+                        "type": "action",
+                        "name": "melee_attack"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "action",
+                    "name": "move_to_enemy"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "convert_or_corrupt",
+            "condition": "neutral_entity_nearby",
+            "children": [
+              {
+                "type": "action",
+                "name": "attempt_conversion"
+              }
+            ]
+          },
+          {
+            "type": "action",
+            "name": "patrol_territory"
+          }
+        ]
+      }
+    },
+
+    "paladin_combat": {
+      "description": "Defensive behavior for silver paladins focused on protection",
+      "root": {
+        "type": "selector",
+        "name": "paladin_main",
+        "children": [
+          {
+            "type": "sequence",
+            "name": "heal_ally",
+            "condition": "injured_ally_nearby",
+            "children": [
+              {
+                "type": "action",
+                "name": "cast_healing_light"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "turn_undead",
+            "condition": "undead_enemy_nearby",
+            "children": [
+              {
+                "type": "action",
+                "name": "channel_turning"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "defensive_combat",
+            "condition": "enemy_threatening_ally",
+            "children": [
+              {
+                "type": "action",
+                "name": "interpose_between_enemy_and_ally"
+              },
+              {
+                "type": "action",
+                "name": "defensive_stance"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "smite_evil",
+            "condition": "evil_enemy_in_range",
+            "children": [
+              {
+                "type": "action",
+                "name": "cast_holy_smite"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "standard_combat",
+            "condition": "enemy_visible",
+            "children": [
+              {
+                "type": "action",
+                "name": "blessed_weapon_attack"
+              }
+            ]
+          },
+          {
+            "type": "action",
+            "name": "guard_position"
+          }
+        ]
+      }
+    },
+
+    "scavenger_stealth": {
+      "description": "Stealth and scavenging behavior for ratkin",
+      "root": {
+        "type": "selector",
+        "name": "scavenger_main",
+        "children": [
+          {
+            "type": "sequence",
+            "name": "flee_if_outmatched",
+            "condition": "stronger_enemy_nearby",
+            "children": [
+              {
+                "type": "action",
+                "name": "activate_stealth"
+              },
+              {
+                "type": "action",
+                "name": "flee_to_tunnel"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "loot_valuable_items",
+            "condition": "valuable_item_visible",
+            "children": [
+              {
+                "type": "action",
+                "name": "check_for_traps"
+              },
+              {
+                "type": "action",
+                "name": "grab_item"
+              },
+              {
+                "type": "action",
+                "name": "hide_item_in_stash"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "opportunistic_attack",
+            "condition": "weak_enemy_alone",
+            "children": [
+              {
+                "type": "action",
+                "name": "sneak_attack"
+              },
+              {
+                "type": "action",
+                "name": "loot_corpse"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "scout_area",
+            "condition": "new_area_detected",
+            "children": [
+              {
+                "type": "action",
+                "name": "stealth_scout"
+              },
+              {
+                "type": "action",
+                "name": "mark_interesting_locations"
+              }
+            ]
+          },
+          {
+            "type": "action",
+            "name": "explore_safely"
+          }
+        ]
+      }
+    },
+
+    "assassin_stealth": {
+      "description": "Professional assassination behavior",
+      "root": {
+        "type": "selector",
+        "name": "assassin_main",
+        "children": [
+          {
+            "type": "sequence",
+            "name": "execute_contract",
+            "condition": "target_identified",
+            "children": [
+              {
+                "type": "action",
+                "name": "stalk_target"
+              },
+              {
+                "type": "action",
+                "name": "wait_for_opportunity"
+              },
+              {
+                "type": "action",
+                "name": "assassination_strike"
+              },
+              {
+                "type": "action",
+                "name": "vanish_into_shadows"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "eliminate_witness",
+            "condition": "witnessed_killing",
+            "children": [
+              {
+                "type": "action",
+                "name": "silence_witness"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "defensive_combat",
+            "condition": "discovered_and_threatened",
+            "children": [
+              {
+                "type": "action",
+                "name": "smoke_bomb"
+              },
+              {
+                "type": "action",
+                "name": "escape_route"
+              }
+            ]
+          },
+          {
+            "type": "action",
+            "name": "maintain_cover"
+          }
+        ]
+      }
+    },
+
+    "undead_relentless": {
+      "description": "Simple, relentless undead behavior",
+      "root": {
+        "type": "selector",
+        "name": "undead_main",
+        "children": [
+          {
+            "type": "sequence",
+            "name": "attack_living",
+            "condition": "living_creature_nearby",
+            "children": [
+              {
+                "type": "action",
+                "name": "shamble_to_target"
+              },
+              {
+                "type": "action",
+                "name": "claw_attack"
+              }
+            ]
+          },
+          {
+            "type": "sequence",
+            "name": "follow_necromancer",
+            "condition": "necromancer_present",
+            "children": [
+              {
+                "type": "action",
+                "name": "follow_master"
+              }
+            ]
+          },
+          {
+            "type": "action",
+            "name": "wander_aimlessly"
+          }
+        ]
+      }
+    }
+  },
+
+  "conditions": {
+    "health_below_25_percent": {
+      "type": "health_check",
+      "operator": "less_than",
+      "value": 0.25
+    },
+    "ally_in_danger_nearby": {
+      "type": "faction_member_endangered",
+      "radius": 5
+    },
+    "enemy_visible": {
+      "type": "enemy_in_sight",
+      "radius": 10
+    },
+    "has_mana_and_range": {
+      "type": "composite_and",
+      "conditions": [
+        {"type": "mana_check", "operator": "greater_than", "value": 10},
+        {"type": "enemy_in_range", "range": 8}
+      ]
+    },
+    "stronger_enemy_nearby": {
+      "type": "threat_assessment",
+      "threat_threshold": 1.5,
+      "radius": 8
+    },
+    "valuable_item_visible": {
+      "type": "item_detection",
+      "min_value": 50,
+      "radius": 6
+    }
+  },
+
+  "actions": {
+    "cast_flame_bolt": {
+      "type": "spell_cast",
+      "spell": "flame_bolt",
+      "mana_cost": 8,
+      "range": 8,
+      "damage": "2d6+int_modifier"
+    },
+    "fanatical_charge": {
+      "type": "special_move",
+      "effect": "movement_speed_x2",
+      "duration": 1,
+      "bonus_damage": 5
+    },
+    "cast_healing_light": {
+      "type": "spell_cast",
+      "spell": "healing_light",
+      "mana_cost": 12,
+      "range": 5,
+      "healing": "3d4+wis_modifier"
+    },
+    "sneak_attack": {
+      "type": "combat_action",
+      "requires_stealth": true,
+      "damage_multiplier": 2.0,
+      "crit_chance_bonus": 0.3
+    }
+  }
+}

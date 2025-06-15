@@ -1,0 +1,257 @@
+{
+  "archetypes": {
+    "cult_zealot": {
+      "name": "Flame Zealot",
+      "description": "Fanatical cultist devoted to spreading dark flame magic",
+      "faction_allegiance": "cult_of_flame",
+      "base_personality": {
+        "aggression": 0.9,
+        "caution": 0.2,
+        "curiosity": 0.3,
+        "loyalty": 0.95,
+        "fear_threshold": 0.1,
+        "pain_tolerance": 0.9
+      },
+      "behavior_tree": "zealot_combat",
+      "special_abilities": [
+        "dark_blessing",
+        "fanatical_charge",
+        "flame_immunity"
+      ],
+      "equipment_preferences": [
+        "flame_enchanted_weapons",
+        "ritual_robes",
+        "cult_symbols"
+      ],
+      "loot_preferences": [
+        "magical_artifacts",
+        "religious_items",
+        "flame_crystals"
+      ],
+      "combat_style": "aggressive_caster",
+      "social_traits": {
+        "trust_faction_members": 0.9,
+        "trust_outsiders": 0.1,
+        "recruitment_attempts": 0.6,
+        "information_sharing": 0.8
+      }
+    },
+
+    "warden_paladin": {
+      "name": "Silver Paladin",
+      "description": "Noble warrior-priest dedicated to protecting the innocent",
+      "faction_allegiance": "silver_wardens",
+      "base_personality": {
+        "aggression": 0.6,
+        "caution": 0.7,
+        "curiosity": 0.5,
+        "loyalty": 0.9,
+        "fear_threshold": 0.3,
+        "pain_tolerance": 0.8
+      },
+      "behavior_tree": "paladin_combat",
+      "special_abilities": [
+        "holy_smite",
+        "healing_light",
+        "undead_turning",
+        "divine_protection"
+      ],
+      "equipment_preferences": [
+        "blessed_weapons",
+        "plate_armor",
+        "holy_symbols"
+      ],
+      "loot_preferences": [
+        "holy_artifacts",
+        "healing_potions",
+        "blessed_items"
+      ],
+      "combat_style": "defensive_tank",
+      "social_traits": {
+        "trust_faction_members": 0.9,
+        "trust_outsiders": 0.6,
+        "recruitment_attempts": 0.4,
+        "information_sharing": 0.7
+      }
+    },
+
+    "ratkin_scavenger": {
+      "name": "Tunnel Scavenger",
+      "description": "Clever ratkin focused on finding valuable scraps and avoiding danger",
+      "faction_allegiance": "ratkin_tribes",
+      "base_personality": {
+        "aggression": 0.3,
+        "caution": 0.9,
+        "curiosity": 0.8,
+        "loyalty": 0.6,
+        "fear_threshold": 0.7,
+        "pain_tolerance": 0.4
+      },
+      "behavior_tree": "scavenger_stealth",
+      "special_abilities": [
+        "stealth_mastery",
+        "trap_detection",
+        "quick_escape",
+        "item_appraisal"
+      ],
+      "equipment_preferences": [
+        "light_armor",
+        "daggers",
+        "lockpicks",
+        "rope"
+      ],
+      "loot_preferences": [
+        "shiny_objects",
+        "tools",
+        "food",
+        "small_valuables"
+      ],
+      "combat_style": "hit_and_run",
+      "social_traits": {
+        "trust_faction_members": 0.7,
+        "trust_outsiders": 0.3,
+        "recruitment_attempts": 0.2,
+        "information_sharing": 0.5
+      }
+    },
+
+    "shadow_assassin": {
+      "name": "Shadow Blade",
+      "description": "Professional killer who works for the highest bidder",
+      "faction_allegiance": "shadow_guild",
+      "base_personality": {
+        "aggression": 0.7,
+        "caution": 0.8,
+        "curiosity": 0.4,
+        "loyalty": 0.3,
+        "fear_threshold": 0.4,
+        "pain_tolerance": 0.7
+      },
+      "behavior_tree": "assassin_stealth",
+      "special_abilities": [
+        "shadow_step",
+        "backstab",
+        "poison_mastery",
+        "invisibility"
+      ],
+      "equipment_preferences": [
+        "poisoned_blades",
+        "shadow_cloak",
+        "climbing_gear"
+      ],
+      "loot_preferences": [
+        "gold",
+        "gems",
+        "contracts",
+        "poison_ingredients"
+      ],
+      "combat_style": "stealth_assassin",
+      "social_traits": {
+        "trust_faction_members": 0.5,
+        "trust_outsiders": 0.1,
+        "recruitment_attempts": 0.1,
+        "information_sharing": 0.2
+      }
+    },
+
+    "undead_skeleton": {
+      "name": "Animated Skeleton",
+      "description": "Reanimated bones driven by dark magic and ancient hatred",
+      "faction_allegiance": "undead_legions",
+      "base_personality": {
+        "aggression": 0.8,
+        "caution": 0.1,
+        "curiosity": 0.0,
+        "loyalty": 1.0,
+        "fear_threshold": 0.0,
+        "pain_tolerance": 1.0
+      },
+      "behavior_tree": "undead_relentless",
+      "special_abilities": [
+        "undead_immunity",
+        "bone_regeneration",
+        "necromantic_aura"
+      ],
+      "equipment_preferences": [
+        "ancient_weapons",
+        "bone_armor",
+        "cursed_items"
+      ],
+      "loot_preferences": [],
+      "combat_style": "relentless_melee",
+      "social_traits": {
+        "trust_faction_members": 1.0,
+        "trust_outsiders": 0.0,
+        "recruitment_attempts": 0.0,
+        "information_sharing": 0.0
+      }
+    },
+
+    "aggressive_monster": {
+      "name": "Aggressive Monster",
+      "description": "A hostile creature that attacks on sight.",
+      "faction_allegiance": "monsters",
+      "base_personality": {
+        "aggression": 1.0,
+        "caution": 0.2,
+        "curiosity": 0.1,
+        "loyalty": 0.5,
+        "fear_threshold": 0.1,
+        "pain_tolerance": 0.8
+      },
+      "behavior_tree": "monster_aggressive",
+      "special_abilities": [
+        "rage_attack"
+      ],
+      "equipment_preferences": [
+        "claws",
+        "teeth"
+      ],
+      "loot_preferences": [
+        "monster_hide",
+        "monster_claws"
+      ],
+      "combat_style": "berserker",
+      "social_traits": {
+        "trust_faction_members": 0.2,
+        "trust_outsiders": 0.0,
+        "recruitment_attempts": 0.0,
+        "information_sharing": 0.0
+      }
+    },
+
+    "tough_monster": {
+      "name": "Tough Monster",
+      "description": "A resilient and powerful monster that can withstand heavy attacks.",
+      "faction_allegiance": "monsters",
+      "base_personality": {
+        "aggression": 0.8,
+        "caution": 0.4,
+        "curiosity": 0.1,
+        "loyalty": 0.3,
+        "fear_threshold": 0.05,
+        "pain_tolerance": 1.0
+      },
+      "behavior_tree": "monster_tough",
+      "special_abilities": [
+        "damage_resistance",
+        "stunning_roar"
+      ],
+      "equipment_preferences": [
+        "thick_hide",
+        "horns"
+      ],
+      "loot_preferences": [
+        "monster_hide",
+        "monster_horns"
+      ],
+      "combat_style": "tank",
+      "social_traits": {
+        "trust_faction_members": 0.3,
+        "trust_outsiders": 0.0,
+        "recruitment_attempts": 0.0,
+        "information_sharing": 0.0
+      }
+    }
+  }
+}

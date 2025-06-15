@@ -1,0 +1,390 @@
+{
+  "quest_templates": {
+    "faction_war_sabotage": {
+      "name": "Sabotage Enemy Operations",
+      "description": "Disrupt {enemy_faction} operations to aid {ally_faction} in their conflict",
+      "category": "faction_warfare",
+      "triggers": [
+        {
+          "type": "faction_conflict_active",
+          "participants": ["any", "any"],
+          "conflict_intensity": "medium"
+        }
+      ],
+      "requirements": {
+        "player_reputation": {
+          "faction": "ally_faction",
+          "min_value": 20
+        },
+        "world_state": {
+          "active_conflicts": {"min": 1}
+        }
+      },
+      "objectives": [
+        {
+          "type": "destroy_structure",
+          "target": "{enemy_faction_supply_depot}",
+          "optional": false,
+          "stealth_bonus": true
+        },
+        {
+          "type": "eliminate_target",
+          "target": "{enemy_faction_supply_officer}",
+          "optional": true,
+          "reputation_bonus": 5
+        }
+      ],
+      "constraints": [
+        {
+          "type": "time_limit",
+          "turns": 50,
+          "failure_consequence": "enemy_reinforcements"
+        },
+        {
+          "type": "stealth_preferred",
+          "detection_penalty": -10
+        }
+      ],
+      "rewards": {
+        "reputation_changes": {
+          "ally_faction": 15,
+          "enemy_faction": -25
+        },
+        "world_effects": [
+          "weaken_enemy_supply_lines",
+          "boost_ally_morale"
+        ],
+        "material_rewards": {
+          "gold": "100-300",
+          "items": ["random_weapon", "faction_token"]
+        }
+      },
+      "failure_consequences": {
+        "reputation_changes": {
+          "ally_faction": -5,
+          "enemy_faction": -5
+        },
+        "world_effects": [
+          "strengthen_enemy_defenses"
+        ]
+      }
+    },
+
+    "redemption_trial": {
+      "name": "Trial of Redemption",
+      "description": "Prove your worth to {faction} through a sacred trial",
+      "category": "reputation_recovery",
+      "triggers": [
+        {
+          "type": "reputation_threshold",
+          "faction": "any",
+          "max_value": -30,
+          "condition": "player_requests_redemption"
+        }
+      ],
+      "requirements": {
+        "player_reputation": {
+          "faction": "target_faction",
+          "max_value": -20
+        },
+        "player_state": {
+          "not_in_combat": true,
+          "has_offering": true
+        }
+      },
+      "objectives": [
+        {
+          "type": "survive_trial",
+          "location": "{faction_sacred_ground}",
+          "duration": 10,
+          "enemies": "trial_guardians"
+        },
+        {
+          "type": "ritual_component",
+          "action": "place_offering",
+          "item": "valuable_tribute"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "no_faction_harm",
+          "faction": "target_faction",
+          "violation_penalty": "trial_failure"
+        },
+        {
+          "type": "solo_only",
+          "no_allies_allowed": true
+        }
+      ],
+      "rewards": {
+        "reputation_changes": {
+          "target_faction": 40
+        },
+        "special_effects": [
+          "clear_major_grievances",
+          "grant_probationary_status"
+        ],
+        "unlocks": [
+          "faction_basic_quests",
+          "faction_merchants"
+        ]
+      },
+      "failure_consequences": {
+        "reputation_changes": {
+          "target_faction": -10
+        },
+        "effects": [
+          "permanent_ban_from_trials"
+        ]
+      }
+    },
+
+    "artifact_recovery": {
+      "name": "Recover Sacred Artifact",
+      "description": "Retrieve the {artifact_name} from {location} for {faction}",
+      "category": "artifact_retrieval",
+      "triggers": [
+        {
+          "type": "artifact_lost",
+          "artifact_importance": "high"
+        },
+        {
+          "type": "faction_goal_activated",
+          "goal_type": "recover_artifact"
+        }
+      ],
+      "requirements": {
+        "player_reputation": {
+          "faction": "quest_giver",
+          "min_value": 10
+        },
+        "player_level": {
+          "min": 5
+        }
+      },
+      "objectives": [
+        {
+          "type": "navigate_to_location",
+          "target": "{artifact_location}",
+          "hazards": "location_specific"
+        },
+        {
+          "type": "defeat_guardian",
+          "target": "{artifact_guardian}",
+          "optional": false
+        },
+        {
+          "type": "retrieve_item",
+          "target": "{artifact_name}",
+          "transport_safely": true
+        }
+      ],
+      "constraints": [
+        {
+          "type": "artifact_protection",
+          "no_damage_allowed": true,
+          "failure_penalty": "quest_failure"
+        }
+      ],
+      "rewards": {
+        "reputation_changes": {
+          "quest_giver": 25
+        },
+        "material_rewards": {
+          "gold": "200-500",
+          "items": ["artifact_replica", "faction_blessing"]
+        },
+        "world_effects": [
+          "restore_faction_power",
+          "unlock_faction_abilities"
+        ]
+      }
+    },
+
+    "diplomatic_mission": {
+      "name": "Diplomatic Envoy",
+      "description": "Deliver {faction_a}'s proposal to {faction_b} and negotiate terms",
+      "category": "diplomacy",
+      "triggers": [
+        {
+          "type": "faction_seeks_alliance",
+          "urgency": "medium"
+        },
+        {
+          "type": "war_exhaustion_high",
+          "faction": "any"
+        }
+      ],
+      "requirements": {
+        "player_reputation": {
+          "faction_a": 30,
+          "faction_b": 0
+        },
+        "player_skills": {
+          "diplomacy": 15
+        }
+      },
+      "objectives": [
+        {
+          "type": "deliver_message",
+          "from": "faction_a",
+          "to": "faction_b_leader",
+          "secure_delivery": true
+        },
+        {
+          "type": "negotiate_terms",
+          "skill_check": "diplomacy",
+          "difficulty": "medium",
+          "attempts": 3
+        },
+        {
+          "type": "return_with_answer",
+          "time_sensitive": true
+        }
+      ],
+      "constraints": [
+        {
+          "type": "neutrality_required",
+          "no_faction_favoritism": true
+        },
+        {
+          "type": "message_security",
+          "no_tampering_allowed": true
+        }
+      ],
+      "rewards": {
+        "reputation_changes": {
+          "faction_a": 20,
+          "faction_b": 10
+        },
+        "world_effects": [
+          "improve_faction_relations",
+          "possible_alliance_formation"
+        ],
+        "special_rewards": [
+          "diplomatic_immunity",
+          "neutral_status_with_both_factions"
+        ]
+      },
+      "failure_consequences": {
+        "reputation_changes": {
+          "faction_a": -15,
+          "faction_b": -10
+        },
+        "world_effects": [
+          "worsen_faction_relations",
+          "player_marked_as_unreliable"
+        ]
+      }
+    },
+
+    "territorial_control": {
+      "name": "Secure Territory",
+      "description": "Establish {faction} control over {territory_name}",
+      "category": "territorial_expansion",
+      "triggers": [
+        {
+          "type": "territory_contested",
+          "strategic_value": "high"
+        },
+        {
+          "type": "faction_expansion_goal",
+          "priority": "high"
+        }
+      ],
+      "requirements": {
+        "player_reputation": {
+          "faction": "quest_giver",
+          "min_value": 40
+        },
+        "territory_state": {
+          "current_controller": "none_or_weak"
+        }
+      },
+      "objectives": [
+        {
+          "type": "clear_hostile_forces",
+          "area": "{territory_name}",
+          "threat_level": "variable"
+        },
+        {
+          "type": "establish_outpost",
+          "location": "{strategic_point}",
+          "fortification_level": "basic"
+        },
+        {
+          "type": "hold_territory",
+          "duration": 20,
+          "defend_against": "counterattacks"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "minimize_collateral",
+          "civilian_protection": true
+        }
+      ],
+      "rewards": {
+        "reputation_changes": {
+          "quest_giver": 30
+        },
+        "world_effects": [
+          "faction_gains_territory",
+          "shift_regional_power_balance"
+        ],
+        "ongoing_benefits": [
+          "safe_passage_through_territory",
+          "faction_reinforcements_available"
+        ]
+      }
+    }
+  },
+
+  "quest_variables": {
+    "factions": [
+      "cult_of_flame",
+      "silver_wardens",
+      "ratkin_tribes",
+      "shadow_guild",
+      "undead_legions"
+    ],
+    "locations": [
+      "obsidian_catacombs",
+      "ember_shrine",
+      "shadow_depths",
+      "crystal_caverns",
+      "bone_gardens"
+    ],
+    "artifacts": [
+      "flame_heart_crystal",
+      "silver_dawn_blade",
+      "ratkin_crown_of_tunnels",
+      "shadow_cloak_of_whispers",
+      "necromancer_phylactery"
+    ],
+    "supply_depot_types": [
+      "weapon_cache",
+      "food_stores",
+      "magical_components",
+      "healing_supplies"
+    ]
+  },
+
+  "dynamic_modifiers": {
+    "difficulty_scaling": {
+      "player_level_modifier": 0.1,
+      "faction_strength_modifier": 0.2,
+      "world_danger_modifier": 0.15
+    },
+    "reputation_requirements": {
+      "base_threshold": 10,
+      "faction_pride_modifier": 0.5,
+      "recent_conflicts_modifier": 1.2
+    },
+    "reward_scaling": {
+      "base_gold_multiplier": 1.0,
+      "danger_bonus": 0.3,
+      "reputation_bonus": 0.2
+    }
+  }
+}

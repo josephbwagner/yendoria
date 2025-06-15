@@ -15,6 +15,7 @@ from .entities.player import create_player, move_player
 from .game_map.game_map import GameMap
 from .input_handlers.event_handler import handle_events
 from .modding import EventBus, EventType  # Add event system import
+from .systems.ai_engine_integration import init_ai_integration
 from .systems.rendering import RenderingSystem
 from .utils.constants import (
     MAP_HEIGHT,
@@ -57,6 +58,7 @@ class GameEngine:
         """
         self.screen_width = width
         self.screen_height = height
+        self.headless = headless
 
         # Initialize tcod context only if not in headless mode
         if not headless:
@@ -78,6 +80,10 @@ class GameEngine:
         self.entities: list[Entity] = []
         self.event_bus = EventBus()  # Add event system for modding
         self.is_running = True
+
+        # Initialize AI systems
+        self.ai_integration = init_ai_integration(self.event_bus)
+        self.ai_integration.initialize_ai_systems()
 
         # Generate the dungeon and create entities
         self._setup_game()
@@ -328,10 +334,41 @@ class GameEngine:
         return True  # Combat consumes turn
 
     def update_monsters(self) -> None:
-        """Update all monster AI."""
+        """Update all monster AI using the AI system."""
+        # Update AI systems (handles all AI entities)
+        if self.ai_integration:
+            self.ai_integration.update_ai_systems(delta_time=1.0)
+
+        # Execute AI actions for entities
         for entity in self.entities:
-            if entity != self.player and hasattr(entity, "ai"):
-                entity.ai.perform(self.game_map, self.entities)
+            if entity != self.player and hasattr(entity, "_ai_entity_id"):
+                # Get AI action from the AI system
+                if self.ai_integration:
+                    action = self.ai_integration.get_ai_action_for_entity(entity)
+                    if action and hasattr(entity, "ai"):
+                        try:
+                            entity.ai.perform(self.game_map, self.entities)
+                        except Exception as e:
+                            import logging
+
+                            logger = logging.getLogger(__name__)
+                            logger.error(
+                                "Error in AI perform for entity %s: %s",
+                                getattr(entity, "id", entity),
+                                e,
+                            )
+            elif entity != self.player and hasattr(entity, "ai"):
+                try:
+                    entity.ai.perform(self.game_map, self.entities)
+                except Exception as e:
+                    import logging
+
+                    logger = logging.getLogger(__name__)
+                    logger.error(
+                        "Error in fallback AI perform for entity %s: %s",
+                        getattr(entity, "id", entity),
+                        e,
+                    )
 
     def handle_events(self) -> bool:
         """Handle input events.
@@ -397,6 +434,7 @@ class GameEngine:
                 self.render()
         finally:
             # Clean up
+            self.ai_integration.shutdown()
             if self.context is not None:
                 self.context.close()
 

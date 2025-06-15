@@ -14,6 +14,7 @@ packages = [{include = "yendoria", from = "src"}]
 python = "^3.10"
 tcod = "^19.0.0"
 numpy = "^2.0.0"
+watchdog = "^4.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.0,<9.0"
@@ -95,10 +96,14 @@ warn_unreachable = false
 strict_optional = true
 show_error_codes = true
 
-# Specify explicit paths to avoid duplicate module detection
-files = ["src/yendoria", "tests"]
-explicit_package_bases = true
-namespace_packages = true
+# Fix module path detection to avoid duplicates
+mypy_path = "src"
+# Only check the main package to avoid path conflicts
+files = ["src/yendoria"]
+
+# Temporarily ignore some modules while type annotations are being improved
+# Remove these as type coverage improves
+ignore_errors = false
 
 # Per-module options
 [[tool.mypy.overrides]]
