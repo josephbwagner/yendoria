@@ -1,6 +1,22 @@
 # CHANGELOG
 
 
+## v0.5.0 (2025-06-16)
+
+### Bug Fixes
+
+- Windows CI workflow
+  ([`4587dfb`](https://github.com/josephbwagner/yendoria/commit/4587dfbf392f2b975840a5cc4733c0c976952837))
+
+- Windows CI workflow
+  ([`19688e8`](https://github.com/josephbwagner/yendoria/commit/19688e8c6717b245f34819bcea3e0ea00838bc65))
+
+### Features
+
+- Documentation improvements
+  ([`2eb0b95`](https://github.com/josephbwagner/yendoria/commit/2eb0b95143dbf36da871a920876e19c7a228f86a))
+
+
 ## v0.4.0 (2025-06-15)
 
 ### Features
