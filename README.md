@@ -3,7 +3,7 @@
 A traditional tile-based roguelike game built with Python and libtcod, featuring ASCII graphics, turn-based gameplay, procedural dungeon generation, and a sophisticated AI system.
 
 [![CI](https://github.com/josephbwagner/yendoria/workflows/CI/badge.svg)](https://github.com/josephbwagner/yendoria/actions)
-[![Coverage](https://codecov.io/gh/josephbwagner/yendoria/graph/badge.svg)](https://codecov.io/gh/josephbwagner/yendoria)
+[![codecov](https://codecov.io/gh/josephbwagner/yendoria/branch/master/graph/badge.svg?token=UPLKZ72669)](https://codecov.io/gh/josephbwagner/yendoria)
 [![Documentation](https://img.shields.io/badge/docs-sphinx-blue.svg)](https://josephbwagner.github.io/yendoria/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 
