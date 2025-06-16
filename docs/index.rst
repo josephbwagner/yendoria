@@ -9,6 +9,7 @@ Features
 Core Gameplay
 ~~~~~~~~~~~~~
 * **Entity Component System (ECS)**: Flexible architecture for game entities
+* **Advanced AI System**: Modular AI with personality, memory, factions, and behavior trees
 * **Procedural Generation**: Randomly generated dungeons with rooms and corridors
 * **Field of View**: Dynamic lighting and exploration system with 8-tile radius
 * **Turn-based Combat**: Melee combat with health and damage mechanics
@@ -47,6 +48,14 @@ Contents
 
 .. toctree::
    :maxdepth: 2
+   :caption: AI System:
+
+   ai_overview
+   ai_api
+   ai_examples
+
+.. toctree::
+   :maxdepth: 2
    :caption: Modding System:
 
    modding_quickstart
@@ -70,7 +79,9 @@ The game uses an Entity Component System (ECS) architecture:
 
 * **Entities**: Containers for components (Player, Orc, Troll)
 * **Components**: Data containers (Position, Health, Graphic, AI, Damage)
-* **Systems**: Logic processors (Rendering, Input handling, Game engine)
+* **Systems**: Logic processors (Rendering, Input handling, Game engine, AI systems)
+
+The game features a sophisticated **AI System** with modular behavior systems, personality traits, memory, faction relationships, and event-driven communication. See the :doc:`ai_overview` for complete details.
 
 Key modules:
 
@@ -78,6 +89,7 @@ Key modules:
 * ``game_map/``: Map generation and tile management
 * ``entities/``: Entity creation and management
 * ``components/``: ECS component definitions
+* ``systems/``: Game systems including AI, configuration, and error handling
 * ``systems/``: Game systems (rendering, etc.)
 * ``input_handlers/``: Input processing
 * ``utils/constants.py``: Game configuration and constants
