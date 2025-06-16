@@ -56,7 +56,7 @@ jobs:
 
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
         # Skip this step for PRs since we don't deploy from PRs
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
 
