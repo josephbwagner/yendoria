@@ -11,9 +11,6 @@ jobs:
   test:
     name: Test Python ${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        shell: bash
     strategy:
       fail-fast: false
       matrix:
@@ -38,13 +35,18 @@ jobs:
         installer-parallel: true
 
     - name: Configure Poetry environment
-      run: poetry config virtualenvs.in-project true
+      run: |
+        poetry config virtualenvs.create true
+        poetry config virtualenvs.in-project true
 
     - name: Load cached venv
       id: cached-poetry-dependencies
       uses: actions/cache@v4
       with:
-        path: .venv
+        path: |
+          .venv
+          ~/.cache/pypoetry
+          ~/AppData/Local/pypoetry/Cache
         key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
 
     - name: Install dependencies
@@ -61,7 +63,7 @@ jobs:
       run: poetry run ruff format --check .
 
     - name: Run MyPy type checking
-      run: poetry run mypy
+      run: poetry run mypy src/yendoria
 
     - name: Run tests with coverage
       run: poetry run pytest --cov=src/yendoria --cov-report=xml --cov-report=html --cov-fail-under=55
