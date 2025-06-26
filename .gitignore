@@ -207,6 +207,7 @@ Thumbs.db
 config.ini
 secrets.json
 .secrets
+.safety-project.ini
 
 # Backup files
 *.bak
