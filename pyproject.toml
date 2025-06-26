@@ -21,7 +21,7 @@ pytest = ">=7.0,<9.0"
 sphinx = "^7.0"
 sphinx-autodoc-typehints = "^2.3"
 furo = "^2024.8.6"  # Modern, clean Sphinx theme
-ruff = "^0.11.13"
+ruff = "^0.12.0"
 mypy = "^1.16.1"
 pre-commit = "^4.2.0"
 pytest-cov = "^6.2.1"
