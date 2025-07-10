@@ -29,7 +29,7 @@ pytest-html = "^4.1.1"
 bandit = {extras = ["toml"], version = "^1.8.5"}
 safety = "^3.5.2"
 # Release automation tools
-python-semantic-release = "^10.1.0"  # Semantic versioning and release automation
+python-semantic-release = "^10.2.0"  # Semantic versioning and release automation
 commitizen = "^4.1.0"  # Conventional commits and changelog generation
 
 [build-system]
