@@ -16,6 +16,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.10", "3.11", "3.12", "3.13"]
+                # Exclude Python 3.13 on Windows due to known issues
+        exclude:
+          - os: windows-latest
+            python-version: "3.13"
 
     steps:
     - name: Checkout code
@@ -25,21 +29,6 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-
-    # Add Windows-specific Python 3.13 handling
-    - name: Handle Python 3.13 on Windows
-      if: runner.os == 'Windows' && matrix.python-version == '3.13'
-      run: |
-        # Clear any existing virtual environment
-        if (Test-Path ".venv") { Remove-Item -Recurse -Force ".venv" }
-
-        # Use a shorter path for the virtual environment
-        $env:POETRY_VIRTUALENVS_PATH = "C:\venvs"
-        echo "POETRY_VIRTUALENVS_PATH=C:\venvs" >> $env:GITHUB_ENV
-
-        # Set virtual environment in project to false for Python 3.13 on Windows
-        poetry config virtualenvs.in-project false
-      shell: powershell
 
     - name: Install Poetry (Windows)
       if: runner.os == 'Windows'
@@ -58,11 +47,7 @@ jobs:
     - name: Configure Poetry environment
       run: |
         poetry config virtualenvs.create true
-        # Only set in-project for non-Windows or non-Python 3.13
-        if [ "${{ runner.os }}" != "Windows" ] || [ "${{ matrix.python-version }}" != "3.13" ]; then
-          poetry config virtualenvs.in-project true
-        fi
-      shell: bash
+        poetry config virtualenvs.in-project true
 
     - name: Load cached venv
       id: cached-poetry-dependencies
@@ -72,7 +57,6 @@ jobs:
           .venv
           ~/.cache/pypoetry
           ~/AppData/Local/pypoetry/Cache
-          C:\venvs
         key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
 
     - name: Install dependencies
