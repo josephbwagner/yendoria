@@ -1,0 +1,81 @@
+YENDORIA COMMERCIAL LICENSE
+
+Copyright (c) 2025 Joseph Wagner. All rights reserved.
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+1. DEFINITIONS
+
+"Software" means the Yendoria game, including all game content, world generation
+systems, advanced AI, proprietary algorithms, assets, and related materials.
+
+"Licensor" means Joseph Wagner, the copyright owner.
+
+"You" means the individual or entity exercising the rights granted by this License.
+
+2. GRANT OF RIGHTS
+
+Subject to the terms and conditions of this License, Licensor hereby grants You
+a personal, non-exclusive, non-transferable license to:
+
+a) Install and run the Software for personal, non-commercial use only
+b) Create modifications ("mods") for personal use, subject to restrictions below
+
+3. RESTRICTIONS
+
+You may NOT:
+a) Copy, distribute, or redistribute the Software or any portion thereof
+b) Reverse engineer, decompile, or disassemble the Software
+c) Use the Software for commercial purposes without written permission
+d) Remove or modify copyright notices or licensing information
+e) Create derivative works based on proprietary algorithms or content
+f) Distribute or sell modifications that include proprietary components
+
+4. INTELLECTUAL PROPERTY
+
+All rights, title, and interest in and to the Software, including all
+intellectual property rights, remain with Licensor. This License does not
+grant any rights to trademarks, service marks, or trade names of Licensor.
+
+5. MODDING AND USER CONTENT
+
+You may create modifications using the public Yendoria Engine APIs. Such
+modifications:
+a) Must use only the open-source engine components
+b) Cannot include or redistribute proprietary game content
+c) Must include appropriate attribution to the Yendoria Engine
+d) May be distributed under terms compatible with the engine's MIT license
+
+6. TERMINATION
+
+This License is effective until terminated. Your rights under this License
+will terminate automatically without notice if You fail to comply with any
+term. Upon termination, You must cease all use and destroy all copies of
+the Software.
+
+7. DISCLAIMER OF WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+8. LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL LICENSOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+9. GOVERNING LAW
+
+This License shall be governed by the laws of [YOUR STATE/COUNTRY], without
+regard to conflict of law principles.
+
+10. CONTACT INFORMATION
+
+For licensing inquiries, permissions, or questions about this License:
+Email: j.wagner1024@gmail.com
+Subject: Yendoria Commercial License Inquiry
+
+---
+
+This license is effective as of July 10, 2025.
