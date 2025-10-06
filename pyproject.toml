@@ -26,7 +26,7 @@ mypy = "^1.16.1"
 pre-commit = "^4.2.0"
 pytest-cov = "^6.2.1"
 pytest-html = "^4.1.1"
-bandit = {extras = ["toml"], version = "^1.8.5"}
+bandit = {extras = ["toml"], version = "^1.8.6"}
 safety = "^3.5.2"
 # Release automation tools
 python-semantic-release = "^10.1.0"  # Semantic versioning and release automation
