@@ -23,7 +23,7 @@ sphinx-autodoc-typehints = "^2.3"
 furo = "^2024.8.6"  # Modern, clean Sphinx theme
 ruff = "^0.11.13"
 mypy = "^1.16.1"
-pre-commit = "^4.2.0"
+pre-commit = "^4.5.0"
 pytest-cov = "^6.2.1"
 pytest-html = "^4.1.1"
 bandit = {extras = ["toml"], version = "^1.8.5"}
